@@ -18,5 +18,5 @@ function errorHandler(error, res) {
 
 
 module.exports = {
-    health
+    health,
 }
