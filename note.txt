@@ -1,0 +1,15 @@
+admin/editor login page
+admin dashboard
+ -list of blogs, total views
+ -edit and delete blog post
+ -add new blog post
+add new blog page
+edit blog page
+
+
+
+
+userviews
+portfolliow  -hompage
+list of blogs -/blog
+blog post - /view blog
