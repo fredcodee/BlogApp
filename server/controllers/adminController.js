@@ -1,4 +1,3 @@
-const axios = require('axios');
 const jwt  = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const user  = require('../models/userModel')
