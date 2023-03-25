@@ -13,3 +13,15 @@ userviews
 portfolliow  -hompage
 list of blogs -/blog
 blog post - /view blog
+
+
+
+BACKEND
+
+MODELS
+ -users
+ -blog
+
+ 
+
+
