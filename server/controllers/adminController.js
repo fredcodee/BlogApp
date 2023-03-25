@@ -1,6 +1,7 @@
 const jwt  = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const user  = require('../models/userModel')
+const blog = require('../models/blogModel')
 
 
 const health = async(req, res) => {
@@ -61,20 +62,103 @@ const loginUser = async(req, res) => {
 
 const getMe = async (req, res) => {
     try {
-        const token = req.header('Authorization').replace('Bearer ', '')
-        const decoded = jwt.verify(token, process.env.JWT_SECRET)
-        const userdetails = await user.findOne({ _id: decoded.id})
-
-        if (!token) {
-            res.status(401)
-            throw new Error('Not authorized, no token')
-          }
-
-        res.send(userdetails)
+        res.send(req.user.email)
     } catch (error) {
         errorHandler(error, res)
     }
 }
+
+
+// view all blogposts
+const getBlogs = async(req, res) => {
+    try {
+        //sort blogs by date created from newest to oldest
+        const blogposts = await blog.find().sort({date: -1})
+        res.send(blogposts)
+    } catch (error) {
+        errorHandler(error, res)
+    }
+}
+
+//filter blogposts by dates in reg body
+const filterBlogs = async(req, res) => {
+    const {startDate, endDate} = req.body;
+    try {
+        const blogposts = await blog.find({date: {$gte: startDate, $lte: endDate}})
+        res.send(blogposts)
+    } catch (error) {
+        errorHandler(error, res)
+    }
+}
+
+//add blogpost
+const addBlog = async(req, res) => {
+    const {title, description, image} = req.body;
+    try {
+        const newBlog = new blog({ title, description, image}) 
+        const savedBlog = await newBlog.save()
+        res.send(savedBlog)
+    } catch (error) {
+        errorHandler(error, res)
+    }
+}
+
+
+//delete blogpost
+const deleteBlog = async(req, res) => {
+    const {id} = req.body;
+    try {
+        const deletedBlog = await blog.findByIdAndDelete(id)
+        res.send.json({message: 'Blog deleted successfully'})
+    } catch (error) {
+        errorHandler(error, res)
+    }
+}
+
+
+//update blogpost
+const updateBlog = async(req, res) => {
+    const { title, description, image} = req.body;
+    try {
+        //find blog by id
+        const document = await blog.find({title: title})
+        await blog.updateOne({ _id: document._id }, {
+            $set: {
+                title: title,
+                description: description,
+                image: image
+            }
+        });
+        res.send.json({message: 'Blog updated successfully'})
+
+    } catch (error) {
+        errorHandler(error, res)
+    }
+}
+
+// pin blogpost
+const pinBlog = async(req, res) => {
+    const {id} = req.body;
+    try {
+        await blog.updateOne({ _id: id }, {
+            $set: {
+                pin: true
+            }
+        });
+        res.send.json({message: 'Blog pinned successfully'})
+
+    } catch (error) {
+        errorHandler(error, res)
+    }
+}
+
+
+
+
+
+
+
+
 
 
 //create a function to  handle token generation
@@ -94,5 +178,5 @@ function errorHandler(error, res) {
 
 
 module.exports = {
-    health, registerUser, loginUser, getMe
+    health, registerUser, loginUser, getMe, getBlogs, addBlog, filterBlogs, deleteBlog,  updateBlog, pinBlog
 }
