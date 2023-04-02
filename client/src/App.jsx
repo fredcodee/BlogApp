@@ -1,5 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Link, Route, Router, Routes} from 'react-router-dom'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.min.js';
 import Home from './pages/Home';
 import Register from './pages/Register';
 import Login from './pages/Login'
