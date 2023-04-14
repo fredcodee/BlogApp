@@ -5,7 +5,9 @@ import React from 'react'
 const Blog = () => {
   return (
     <div>
-       <h1>Blogs</h1>
+      <div className='text-center p-6 bg-lightGrey'>
+        <h1>THE FREDCODE BLOG</h1>
+      </div>
     </div>
   )
 }
