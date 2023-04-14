@@ -1,5 +1,6 @@
 import React from 'react'
 import logo from '../assets/images/logo.jpg'
+import { Link } from 'react-router-dom'
 
 const NavBar = () => {
   return (
@@ -10,11 +11,10 @@ const NavBar = () => {
                 <img src={logo} className="w-12 h-12" />
             </div>
             <div className="hidden md:flex space-x-10">
-                <a href="#" className="text-white hover:text-darkOrange text-lg no-underline">Home</a>
-                <a href="#" className="text-white hover:text-darkOrange text-lg no-underline">Blog</a>
-                <a href="#" className="text-white hover:text-darkOrange text-lg no-underline">Contact</a>
+                <Link to="/" className="text-white hover:text-darkOrange text-lg no-underline">Home</Link>
+                <Link to="/blog" className="text-white hover:text-darkOrange text-lg no-underline">Blog</Link>
+                <Link to="/contact" className="text-white hover:text-darkOrange text-lg no-underline">Contact</Link>
             </div>
-            
         </div>
       </nav>
     </div>

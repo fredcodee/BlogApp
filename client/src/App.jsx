@@ -9,11 +9,12 @@ import Logout from './pages/Logout';
 import Blog from './pages/Blog';
 import Admin from './pages/Admin';
 import BlogPost from './pages/BlogPost';
-
-
+import NavBar from './components/NavBar';
+ 
 function App() {
   return (
       <BrowserRouter>
+        <NavBar/>
         <Routes>
             <Route element = {<Home />}  path = "/"/>
             <Route element = {<Blog />} path = "/blog" />
