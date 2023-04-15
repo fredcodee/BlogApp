@@ -5,72 +5,73 @@ import { Link } from 'react-router-dom'
 const BlogGrid = () => {
     return (
         <div className='grid grid-cols-1 md:grid-cols-3 container p-6 gap-5'>
-            <div className="grid1-item">
-                <div>
-                    <img src={example} alt="" />
+            <Link to="#" className='no-underline text-black'>  
+                <div className="grid1-item">
+                    <div>
+                        <img src={example} alt="" />
+                    </div>
+                    <div className='p-6'>
+                        <h3 className='hover:text-darkOrange'>How i learned flask in one week by building</h3>
+                        <p>by Fred, on 14th, april 2019</p>
+                    </div>
                 </div>
-                <div>
-                    <h3 className='hover:text-darkOrange'>How i learned flask in one week by building</h3>
+            </Link>
+            
+            <Link to="#" className='no-underline text-black'>  
+                <div className="grid1-item">
+                    <div>
+                        <img src={example} alt="" />
+                    </div>
+                    <div className='p-6'>
+                        <h3 className='hover:text-darkOrange'>How i learned flask in one week by building</h3>
+                        <p>by Fred, on 14th, april 2019</p>
+                    </div>
                 </div>
-                <div>
-                    <p>by Fred, on 14th, april 2019</p>
+            </Link>
+            <Link to="#" className='no-underline text-black'>  
+                <div className="grid1-item">
+                    <div>
+                        <img src={example} alt="" />
+                    </div>
+                    <div className='p-6'>
+                        <h3 className='hover:text-darkOrange'>How i learned flask in one week by building</h3>
+                        <p>by Fred, on 14th, april 2019</p>
+                    </div>
                 </div>
-            </div>
-            <div className="grid1-item">
-                <div>
-                    <img src={example} alt="" />
+            </Link>
+            <Link to="#" className='no-underline text-black'>  
+                <div className="grid1-item">
+                    <div>
+                        <img src={example} alt="" />
+                    </div>
+                    <div className='p-6'>
+                        <h3 className='hover:text-darkOrange'>How i learned flask in one week by building</h3>
+                        <p>by Fred, on 14th, april 2019</p>
+                    </div>
                 </div>
-                <div>
-                    <h3 className='hover:text-darkOrange'>How i learned flask in one week by building</h3>
+            </Link>
+            <Link to="#" className='no-underline text-black'>  
+                <div className="grid1-item">
+                    <div>
+                        <img src={example} alt="" />
+                    </div>
+                    <div className='p-6'>
+                        <h3 className='hover:text-darkOrange'>How i learned flask in one week by building</h3>
+                        <p>by Fred, on 14th, april 2019</p>
+                    </div>
                 </div>
-                <div>
-                    <p>by Fred, on 14th, april 2019</p>
+            </Link>
+            <Link to="#" className='no-underline text-black'>  
+                <div className="grid1-item">
+                    <div>
+                        <img src={example} alt="" />
+                    </div>
+                    <div className='p-6'>
+                        <h3 className='hover:text-darkOrange'>How i learned flask in one week by building</h3>
+                        <p>by Fred, on 14th, april 2019</p>
+                    </div>
                 </div>
-            </div>
-            <div className="grid1-item">
-                <div>
-                    <img src={example} alt="" />
-                </div>
-                <div>
-                    <h3 className='hover:text-darkOrange'>How i learned flask in one week by building</h3>
-                </div>
-                <div>
-                    <p>by Fred, on 14th, april 2019</p>
-                </div>
-            </div>
-            <div className="grid1-item">
-                <div>
-                    <img src={example} alt="" />
-                </div>
-                <div>
-                    <h3 className='hover:text-darkOrange'>How i learned flask in one week by building</h3>
-                </div>
-                <div>
-                    <p>by Fred, on 14th, april 2019</p>
-                </div>
-            </div>
-            <div className="grid1-item">
-                <div>
-                    <img src={example} alt="" />
-                </div>
-                <div>
-                    <h3 className='hover:text-darkOrange'>How i learned flask in one week by building</h3>
-                </div>
-                <div>
-                    <p>by Fred, on 14th, april 2019</p>
-                </div>
-            </div>
-            <div className="grid1-item">
-                <div>
-                    <img src={example} alt="" />
-                </div>
-                <div>
-                    <h3 className='hover:text-darkOrange'>How i learned flask in one week by building</h3>
-                </div>
-                <div>
-                    <p>by Fred, on 14th, april 2019</p>
-                </div>
-            </div>
+            </Link>
         </div>
     )
 }
