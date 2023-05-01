@@ -7,7 +7,7 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
 const Footer = () => {
     return (
-        <div div className='bg-brightBlue font-mono'>
+        <div className='bg-brightBlue font-mono fixed bottom-0 w-full'>
             <div className="relative container mx-auto p-6">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center pt-2">
@@ -26,10 +26,6 @@ const Footer = () => {
                         <Link to="mailto:wilfredchukwu1@gmail.com" className="no-underline">
                             <FontAwesomeIcon icon={faEnvelope} size="2x" color="#D44638" className="my-gmail-icon" />
                         </Link>
-
-
-
-
                     </div>
                 </div>
             </div>
