@@ -21,8 +21,8 @@ function App() {
             <Route element = {<BlogPost />} path = "/blog/:id" />
 
             {/* admin/editor */}
-            <Route element = {<Login />} path = "/login" />
-            <Route element = {<Register/>} path = "/register" />
+            <Route element = {<Login />} path = "/admin/login/:passcode" />
+            <Route element = {<Register/>} path = "/admin/register/:passcode" />
             <Route element = {<Logout />} path  = "/logout"/>
             <Route element = {<Admin/>} path = "/admin-dashboard" /> 
         </Routes>

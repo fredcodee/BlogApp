@@ -4,7 +4,8 @@ const {auth} = require('../middleware/auth');
 
 
 router.get('/health-check', Controller.health)
-router.post('/190023/register', Controller.registerUser)
+router.post('/check-passcode', Controller.checkPasscode)
+router.post('/register', Controller.registerUser)
 router.post('/login', Controller.loginUser)
 router.get('/me',auth, Controller.getMe)
 router.get('/all-blogs',auth, Controller.getBlogs)

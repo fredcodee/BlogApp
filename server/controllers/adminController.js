@@ -9,6 +9,19 @@ const health = async(req, res) => {
 }
 
 
+const checkPasscode = async(req, res) => {
+    const {passcode} = req.body;
+    try {
+        if(passcode === process.env.PASSCODE){
+            return res.status(200).json({message: 'Passcode is correct'})
+        }else{
+            return res.status(400).json({message: 'Passcode is incorrect'})
+        }
+    } catch (error) {
+        errorHandler(error, res)
+    }
+}
+
 const registerUser = async(req, res)=>{
     const {email, password} = req.body;
     try {
@@ -178,5 +191,5 @@ function errorHandler(error, res) {
 
 
 module.exports = {
-    health, registerUser, loginUser, getMe, getBlogs, addBlog, filterBlogs, deleteBlog,  updateBlog, pinBlog
+    health, registerUser, loginUser, getMe, getBlogs, addBlog, filterBlogs, deleteBlog,  updateBlog, pinBlog, checkPasscode
 }
