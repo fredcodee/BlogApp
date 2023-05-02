@@ -21,20 +21,20 @@ export const AuthProvider = ({ children }) => {
   const [error, setError] = useState(null);
   const history = useNavigate();
 
-  const loginUser = async (e) => {
-    e.preventDefault();
+  const loginUser = async (email, password) => {
     const response = await fetch('/api/admin/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        email: e.target.email.value,
-        password: e.target.password.value,
+        email,
+        password,
       }),
     });
 
     const data = await response.json();
+    console.log(email, password)
     if (response.status === 200) {
       setAuthTokens(data.token);
       setUser(jwt_decode(data.token));
