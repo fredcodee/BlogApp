@@ -10,10 +10,13 @@ import Blog from './pages/Blog';
 import Admin from './pages/Admin';
 import BlogPost from './pages/BlogPost';
 import NavBar from './components/NavBar';
+import { AuthProvider } from './context/AuthContext';
+import PrivateRoute from './utlis/PrivateRoute';
  
 function App() {
   return (
       <BrowserRouter>
+      <AuthProvider>
         <NavBar/>
         <Routes>
             <Route element = {<Home />}  path = "/"/>
@@ -24,8 +27,9 @@ function App() {
             <Route element = {<Login />} path = "/admin/login/:passcode" />
             <Route element = {<Register/>} path = "/admin/register/:passcode" />
             <Route element = {<Logout />} path  = "/logout"/>
-            <Route element = {<Admin/>} path = "/admin-dashboard" /> 
+            <Route element = {<PrivateRoute> <Admin /></PrivateRoute>} path = "/admin-dashboard" /> 
         </Routes>
+        </AuthProvider>
       </BrowserRouter>
   )
 }

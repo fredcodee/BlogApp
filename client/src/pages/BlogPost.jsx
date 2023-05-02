@@ -16,7 +16,7 @@ const BlogPost = () => {
     //change to axios
     let config = {
       method: 'get',
-      url: `http://localhost:1900/api/single-blog/${id}`,
+      url: `/api/single-blog/${id}`,
     };
     await axios.request(config)
       .then((response) => {

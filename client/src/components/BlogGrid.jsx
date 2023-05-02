@@ -14,7 +14,7 @@ const BlogGrid = () => {
         //change to axios
         let config = {
             method: 'post',
-            url: 'http://localhost:1900/api/all-blogs',
+            url: '/api/all-blogs',
           };
         await axios.request(config)
           .then((response) => {
