@@ -39,7 +39,7 @@ export const AuthProvider = ({ children }) => {
       setAuthTokens(data.token);
       setUser(jwt_decode(data.token));
       localStorage.setItem('authTokens', JSON.stringify(data.token));
-      history('/');
+      history('/admin-dashboard');
     } else {
       setError(data.message);
     }
@@ -68,7 +68,7 @@ export const AuthProvider = ({ children }) => {
     setAuthTokens(null);
     setUser(null);
     localStorage.removeItem('authTokens');
-    history('/');
+    history('/blog');
   };
 
   const contextData = {
