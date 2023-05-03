@@ -34,7 +34,6 @@ export const AuthProvider = ({ children }) => {
     });
 
     const data = await response.json();
-    console.log(email, password)
     if (response.status === 200) {
       setAuthTokens(data.token);
       setUser(jwt_decode(data.token));
