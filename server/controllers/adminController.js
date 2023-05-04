@@ -66,7 +66,7 @@ const loginUser = async(req, res) => {
         //create token
         const token = createToken(userdetail._id)
         //send token
-        return res.status(201).json({token})
+        return res.status(200).json({token})
     } catch (error) {
         errorHandler(error, res)
     }
@@ -93,16 +93,18 @@ const getBlogs = async(req, res) => {
     }
 }
 
-//filter blogposts by dates in reg body
-const filterBlogs = async(req, res) => {
-    const {startDate, endDate} = req.body;
+//filter blogpost by title
+const filterBlogs = async (req, res) => {
+    const { title } = req.body;
     try {
-        const blogposts = await blog.find({date: {$gte: startDate, $lte: endDate}})
-        res.send(blogposts)
+      const blogposts = await blog.find({ title: { $regex: title, $options: 'i' } });
+      res.send(blogposts);
     } catch (error) {
-        errorHandler(error, res)
+      errorHandler(error, res);
     }
-}
+  };
+  
+
 
 //add blogpost
 const addBlog = async(req, res) => {

@@ -26,7 +26,6 @@ const Admin = () => {
       });
       const data = await response.json();
       setPosts(data);
-      console.log(data);
     } catch (error) {
       console.log(error);
     }
