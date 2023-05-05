@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Bloglists = ({ posts }) => {
     return (
@@ -26,9 +27,11 @@ const Bloglists = ({ posts }) => {
                                         {posts.map((post) => (
                                             <tr key={post._id}>
                                                 <td className="p-2 whitespace-nowrap">
+                                                <Link to={`/blog/${post._id}`} className='no-underline'>
                                                     <div className="flex items-center">
                                                         <div className="font-medium text-gray-800">{post.title}</div>
                                                     </div>
+                                                </Link>
                                                 </td>
                                                 <td className="p-2 whitespace-nowrap">
                                                     <div className="text-left">{new Date(post.date).toLocaleDateString()}</div>
