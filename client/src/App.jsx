@@ -9,6 +9,7 @@ import Logout from './pages/Logout';
 import Blog from './pages/Blog';
 import Admin from './pages/Admin';
 import BlogPost from './pages/BlogPost';
+import Contact from './pages/Contact';
 import NavBar from './components/NavBar';
 import { AuthProvider } from './context/AuthContext';
 import PrivateRoute from './utlis/PrivateRoute';
@@ -22,6 +23,7 @@ function App() {
             <Route element = {<Home />}  path = "/"/>
             <Route element = {<Blog />} path = "/blog" />
             <Route element = {<BlogPost />} path = "/blog/:id" />
+            <Route element = {<Contact />} path = "/contact" />
 
             {/* admin/editor */}
             <Route element = {<Login />} path = "/admin/login/:passcode" />
