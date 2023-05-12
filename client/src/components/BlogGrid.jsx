@@ -33,11 +33,11 @@ const BlogGrid = () => {
                         <div className="grid1-item">
                             <div>
                                 {/* if blog.image is not null, use blog.image, else use example */}
-                                <img src={blog.image ? blog.image : example} className='w-full h-48'/>
+                                <img src={blog.image ? blog.image : example} className='w-full m-h-[200px] h-full rounded-xl'/>
                             </div>
-                            <div className='p-6'>
-                                <h3 className='hover:text-darkOrange'>{blog.title}</h3>
-                                <p>by Fred, on {new Date(blog.date).toLocaleDateString()}</p>
+                            <div className='p-2'>
+                                <p style={{marginBottom:"0"}}>{new Date(blog.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
+                                <h3 className='hover:text-darkOrange'>{blog.title}</h3>  
                             </div>
                         </div>
                     </Link>

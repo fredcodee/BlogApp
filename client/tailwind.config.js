@@ -16,7 +16,6 @@ export default {
         brightBlue: "#3d85c6",
         brightWhite: "#ffffff",
         darkOrange: "#a65500",
-        lightGrey:"#f3f6f4"
       },
       fontFamily: {
         "sans": ["Roboto", "sans-serif"],

@@ -7,11 +7,11 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
 const Footer = () => {
     return (
-        <div className='bg-brightBlue font-mono fixed bottom-0 w-full'>
+        <div className='bg-gray-200  bottom-0 w-full'>
             <div className="relative container mx-auto p-6">
                 <div className="flex items-center justify-between">
-                    <div className="flex items-center pt-2">
-                        <h2 className='text-white text-lg font-bold'>@Fredcode 2023. All rights reserved.</h2>
+                    <div className="flex items-center pt-2"> 
+                        <h2 className='text-lg'>@Fredcode 2023. All rights reserved.</h2>
                     </div>
                     <div className="hidden md:flex space-x-10">
                         <Link to="https://twitter.com/fredcode_" className="no-underline">
