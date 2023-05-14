@@ -11,7 +11,7 @@ const Contact = () => {
         <div className='container w-full grid gap-4 gap-y-8 md:grid-cols-2'>
             <div className="grid1-item">
                 <h2 role="text" className="text-5xl md:text-6xl font-medium text-slate-800">
-                    Get in touch.
+                    Contact Me.
                 </h2>
                 <div role="text" className="text-center md:text-lg tracking-tight font-normal max-w-[30rem] p-3">
                     I recommend using any of the social media/ avenues below but feel free to fill in the form as well :)
@@ -32,7 +32,7 @@ const Contact = () => {
                 </div>
             </div>
             <div className="grid1-item">
-                <form method="post" action="mailto:wilfredchukwu1@gmail.com" encType="text/plain"  style={{width:'100%'}}>
+                <form method="post" style={{width:'100%'}}>
                     <div className="relative z-0 w-full mb-5">
                     <label htmlFor="name" className="absolute duration-300 left-4 top-1 z-10 origin-0 text-gray-600 pointer-events-none">What is your name?*</label>
                         <input type="text" name="name" id="name" className="pt-6 pb-3 px-4 bg-white block w-full mt-0 border appearance-none focus:outline-none focus:ring-0 rounded focus:border-primary-800 border-gray-400"  fdprocessedid="wz8w3mj"/>
