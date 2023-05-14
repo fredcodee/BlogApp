@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useContext }from 'react'
 import { useParams,Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import AuthContext from '../context/AuthContext'
 import PinnedPosts from '../components/PinnedPosts'
 import example from '../assets/images/example2.jpg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTwitter, faLinkedin,faFacebook } from '@fortawesome/free-brands-svg-icons';
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 
 
 
@@ -13,6 +15,7 @@ import { faTwitter, faLinkedin,faFacebook } from '@fortawesome/free-brands-svg-i
 const BlogPost = () => {
   const { id } = useParams()
   let [blog, setBlog] = useState({})
+  let { user } = useContext(AuthContext)
 
   useEffect(() => {
     getBlog()
@@ -37,7 +40,8 @@ const BlogPost = () => {
     <div className='container'>
       <div>
         <div className='text-center p-3'>
-          <h1 className='text-5xl md:text-6xl leading-tighter tracking-tight font-bold'>Blog Title</h1>
+          { user? <Link to ="/edit"><FontAwesomeIcon icon={faPenToSquare} size="2x" color="#1DA1F2"/></Link> : null}
+          <h1 className='text-5xl md:text-6xl leading-tighter tracking-tight font-bold'>Blog Title</h1> 
           <p className='p-3'>Written by Fredcode</p>
         </div>
         <hr />
