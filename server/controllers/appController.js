@@ -1,4 +1,5 @@
 const blog = require('../models/blogModel')
+const nodemailer = require('nodemailer')
 
 
 const getBlogs = async(req, res) => {
@@ -38,7 +39,41 @@ const getSingleBlog = async(req, res) => {
     }
 }
 
+// contact form send email
+const sendEmail = async(req, res) => {
+    const {name, email, message} = req.body;
+    try {
+        const transporter = nodemailer.createTransport({
+            service: process.env.MAIL_SERVICE,
+            auth: {
+                user: process.env.MAIL_EMAIL,
+                pass: process.env.MAIL_PASSWORD
+            }
+        })
 
+        const mailOptions = {
+            from: email,
+            to: process.env.MAIL_RECIPIENT,
+            subject: `Message from ${name} (fredcode.com)`,
+            text: message
+        }
+
+        transporter.sendMail(mailOptions, (error, info) => {
+            if(error) {
+                console.log(error)
+                res.send('error')
+            } else {
+                console.log('Email sent: ' + info.response)
+                res.send('success')
+            }
+        })
+    } catch (error) {
+        errorHandler(error, res)
+    }
+}
+
+
+// app functions 
 // paginate  function
 function paginate(data, itemsPerPage) {
     const pages = Math.ceil(data.length / itemsPerPage);
@@ -63,4 +98,4 @@ function errorHandler(error, res) {
 }
 
 
-module.exports = { getBlogs, getRandomPinnedBlogs, getSingleBlog }
+module.exports = { getBlogs, getRandomPinnedBlogs, getSingleBlog, sendEmail }
