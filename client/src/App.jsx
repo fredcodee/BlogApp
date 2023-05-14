@@ -11,6 +11,7 @@ import Admin from './pages/Admin';
 import BlogPost from './pages/BlogPost';
 import Contact from './pages/Contact';
 import NavBar from './components/NavBar';
+import Footer from './components/Footer';
 import { AuthProvider } from './context/AuthContext';
 import PrivateRoute from './utlis/PrivateRoute';
  
@@ -31,6 +32,7 @@ function App() {
             <Route element = {<Logout />} path  = "/logout"/>
             <Route element = {<PrivateRoute> <Admin /></PrivateRoute>} path = "/admin-dashboard" /> 
         </Routes>
+        <Footer/>
         </AuthProvider>
       </BrowserRouter>
   )

@@ -1,6 +1,5 @@
 import React from 'react'
 import BlogGrid from '../components/BlogGrid'
-import Footer from '../components/Footer'
 
 
 const Blog = () => {
@@ -29,7 +28,6 @@ const Blog = () => {
       </div>
 
       <hr />
-      <Footer/>
     </div>
   )
 }

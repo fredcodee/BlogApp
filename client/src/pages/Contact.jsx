@@ -1,11 +1,47 @@
 import React from 'react'
+import { useState } from 'react';
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTwitter, faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import Footer from '../components/Footer'
+import axios from 'axios'
 
 const Contact = () => {
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [message, setMessage] = useState("");
+    const [success, setSuccess] = useState(false);
+
+    let handleSubmit = async (e) => {
+        e.preventDefault();
+        let config = {
+            method: 'post',
+            url: '/api/send-email',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            data: {
+                name: name,
+                email: email,
+                message: message
+            }
+        };
+
+        await axios.request(config)
+            .then((response) => {
+                console.log(response.data)
+                setSuccess(true)
+                e.target.reset()
+            })
+            .catch((error) => {
+                console.log(error)
+            });
+    };
+
+
+
+
   return (
     <div>
         <div className='container w-full grid gap-4 gap-y-8 md:grid-cols-2'>
@@ -32,20 +68,23 @@ const Contact = () => {
                 </div>
             </div>
             <div className="grid1-item">
-                <form method="post" style={{width:'100%'}}>
+                <form onSubmit={handleSubmit} style={{width:'100%'}}>
                     <div className="relative z-0 w-full mb-5">
                     <label htmlFor="name" className="absolute duration-300 left-4 top-1 z-10 origin-0 text-gray-600 pointer-events-none">What is your name?*</label>
-                        <input type="text" name="name" id="name" className="pt-6 pb-3 px-4 bg-white block w-full mt-0 border appearance-none focus:outline-none focus:ring-0 rounded focus:border-primary-800 border-gray-400"  fdprocessedid="wz8w3mj"/>
+                        <input type="text" name="name" id="name" className="pt-6 pb-3 px-4 bg-white block w-full mt-0 border appearance-none focus:outline-none focus:ring-0 rounded focus:border-primary-800 border-gray-400"  fdprocessedid="wz8w3mj"onChange={e => setName(e.target.value)} />
                            
                     </div>
                     <div className="relative z-0 w-full mb-5">
                     <label htmlFor="email" className="absolute duration-300 left-4 top-1 z-10 origin-0 text-gray-600 pointer-events-none">What is your email?*</label>
-                        <input type="email" name="email" id="email" className="pt-6 pb-3 px-4 bg-white block w-full mt-0 border appearance-none focus:outline-none focus:ring-0 rounded focus:border-primary-800 border-gray-400" fdprocessedid="d72v06"/>
+                        <input type="email" required name="email" id="email" className="pt-6 pb-3 px-4 bg-white block w-full mt-0 border appearance-none focus:outline-none focus:ring-0 rounded focus:border-primary-800 border-gray-400" fdprocessedid="d72v06" onChange={e => setEmail(e.target.value)}/>
                            
                     </div>
                     <div className="relative z-0 w-full mb-5">
                     <label htmlFor="message" className="absolute duration-300 left-4 top-1 z-10 origin-0 text-gray-600 pointer-events-none">What do you want to talk about?*</label>
-                        <textarea name="message" id="message" className="pt-6 pb-4 px-4 bg-white block w-full mt-0 border appearance-none focus:outline-none focus:ring-0 rounded focus:border-primary-800 border-gray-400" rows="3"></textarea>
+                        <textarea name="message" required id="message" className="pt-6 pb-4 px-4 bg-white block w-full mt-0 border appearance-none focus:outline-none focus:ring-0 rounded focus:border-primary-800 border-gray-400" rows="3" onChange={e => setMessage(e.target.value)}></textarea>
+                    </div>
+                    <div className='text-center'>
+                        {success && <p className="text-green-500 text-lg">Message sent successfully 🙂</p>}
                     </div>
                     <button className="flex flex-wrap items-center gap-2 group tracking-tight font-medium cursor-pointer rounded-lg px-6 py-3 text-lg bg-blue-400 text-primary-50 hover:bg-primary-800 w-full justify-center mt-8" type='submit'>
                         <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 512 512" className="transition-transform h-7 w-7 order-last group-hover:translate-x-2" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
