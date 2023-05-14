@@ -42,34 +42,37 @@ const getSingleBlog = async(req, res) => {
 // contact form send email
 const sendEmail = async(req, res) => {
     const {name, email, message} = req.body;
-    try {
-        const transporter = nodemailer.createTransport({
-            service: process.env.MAIL_SERVICE,
-            auth: {
-                user: process.env.MAIL_EMAIL,
-                pass: process.env.MAIL_PASSWORD
-            }
-        })
+    console.log(req.body)
+    res.send('success')
+    // fix later
+    // try {
+    //     const transporter = nodemailer.createTransport({
+    //         service: process.env.MAIL_SERVICE,
+    //         auth: {
+    //             user: process.env.MAIL_EMAIL,
+    //             pass: process.env.MAIL_PASSWORD
+    //         }
+    //     })
 
-        const mailOptions = {
-            from: email,
-            to: process.env.MAIL_RECIPIENT,
-            subject: `Message from ${name} (fredcode.com)`,
-            text: message
-        }
+    //     const mailOptions = {
+    //         from: email,
+    //         to: process.env.MAIL_RECIPIENT,
+    //         subject: `Message from ${name} (fredcode.com)`,
+    //         text: message
+    //     }
 
-        transporter.sendMail(mailOptions, (error, info) => {
-            if(error) {
-                console.log(error)
-                res.send('error')
-            } else {
-                console.log('Email sent: ' + info.response)
-                res.send('success')
-            }
-        })
-    } catch (error) {
-        errorHandler(error, res)
-    }
+    //     transporter.sendMail(mailOptions, (error, info) => {
+    //         if(error) {
+    //             console.log(error)
+    //             res.send('error')
+    //         } else {
+    //             console.log('Email sent: ' + info.response)
+    //             res.send('success')
+    //         }
+    //     })
+    // } catch (error) {
+    //     errorHandler(error, res)
+    // }
 }
 
 
