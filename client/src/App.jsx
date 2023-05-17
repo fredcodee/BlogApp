@@ -10,6 +10,7 @@ import Blog from './pages/Blog';
 import Admin from './pages/Admin';
 import BlogPost from './pages/BlogPost';
 import Contact from './pages/Contact';
+import Write from './pages/Write';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import { AuthProvider } from './context/AuthContext';
@@ -31,6 +32,7 @@ function App() {
             <Route element = {<Register/>} path = "/admin/register/:passcode" />
             <Route element = {<Logout />} path  = "/logout"/>
             <Route element = {<PrivateRoute> <Admin /></PrivateRoute>} path = "/admin-dashboard" /> 
+            <Route element = {<PrivateRoute> <Write /></PrivateRoute>} path = "/write" />
         </Routes>
         <Footer/>
         </AuthProvider>

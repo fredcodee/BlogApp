@@ -10,7 +10,7 @@ const NavBar = () => {
       <nav className="relative container mx-auto p-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center pt-2">
-            <img src={logo} className="w-12 h-12 rounded-full" />
+            <img src={logo} className="w-12 h-12 rounded-full mr-2" />
             <h2 className='text-2xl font-bold'>Fredcode</h2>
           </div>
 
@@ -18,7 +18,7 @@ const NavBar = () => {
             <div className="hidden md:flex space-x-10">
               <Link to="/blog" className="text-slate-600 font-medium hover:text-darkOrange text-lg no-underline">Blog</Link>
               <Link to="/admin-dashboard" className="text-slate-600 font-medium hover:text-darkOrange text-lg no-underline">Admin-Dashboard</Link>
-              <Link to="/blog" className="text-slate-600 font-medium hover:text-darkOrange text-lg no-underline">New Post</Link>
+              <Link to="/write" className="text-blue-400 font-medium hover:text-darkOrange text-lg no-underline ">New Post</Link>
               <Link to="/contact" className="text-slate-600 font-medium hover:text-darkOrange text-lg no-underline">User Management</Link>
               <Link to="/logout" className=" font-medium text-red-500 hover:text-blue text-lg no-underline">Logout</Link>
             </div>

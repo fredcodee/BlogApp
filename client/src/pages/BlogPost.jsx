@@ -7,7 +7,7 @@ import PinnedPosts from '../components/PinnedPosts'
 import example from '../assets/images/example2.jpg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTwitter, faLinkedin,faFacebook } from '@fortawesome/free-brands-svg-icons';
-import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import { faPenToSquare,faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
 
 
@@ -40,7 +40,17 @@ const BlogPost = () => {
     <div className='container'>
       <div>
         <div className='text-center p-3'>
-          { user? <Link to ="/edit"><FontAwesomeIcon icon={faPenToSquare} size="2x" color="#1DA1F2"/></Link> : null}
+          {user ? (
+            
+            <div className='flex justify-center space-x-4 pb-3'> 
+              <Link to="/edit">
+                <FontAwesomeIcon icon={faPenToSquare} size="2x" color="#1DA1F2" />
+              </Link>
+              <Link to="/delete">
+                <FontAwesomeIcon icon={faTrashCan} size="2x" color="red" />
+              </Link>
+            </div>
+          ) : null}
           <h1 className='text-5xl md:text-6xl leading-tighter tracking-tight font-bold'>Blog Title</h1> 
           <p className='p-3'>Written by Fredcode</p>
         </div>
@@ -57,6 +67,8 @@ const BlogPost = () => {
         illum nihil similique unde ducimus porro sunt explicabo minus. Doloremque!
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis quia numquam molestias aliquam nam eum odit quas dicta, itaque totam perferendis impedit,
         reprehenderit consequuntur corrupti, eveniet eligendi dolores. Quaerat, illum.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam, at. Minus pariatur molestias, incidunt id ea nihil sed, 
+        facere quasi similique quas eos modi laborum corrupti. Laborum ipsa sed nulla.
       </div>
 
       <div>
