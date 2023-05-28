@@ -118,6 +118,16 @@ const addBlog = async(req, res) => {
     }
 }
 
+//add blogimage
+const addBlogImage = async(req, res) => {
+        const  file = req.file;
+        //error handling if file is not jpg or jpeg
+        if(!file.originalname.match(/\.(jpg|jpeg)$/)){
+            return res.status(400).send('Please upload a image file')
+        }
+        res.send(file.filename)
+    }
+
 
 //delete blogpost
 const deleteBlog = async(req, res) => {
@@ -193,5 +203,5 @@ function errorHandler(error, res) {
 
 
 module.exports = {
-    health, registerUser, loginUser, getMe, getBlogs, addBlog, filterBlogs, deleteBlog,  updateBlog, pinBlog, checkPasscode
+    health, registerUser, loginUser, getMe, getBlogs, addBlog, filterBlogs, deleteBlog,  updateBlog, pinBlog, checkPasscode, addBlogImage
 }

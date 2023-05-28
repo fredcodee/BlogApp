@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const Controller = require('../controllers/adminController'); 
+const upload = require('../middleware/multer');
 const {auth} = require('../middleware/auth');
 
 
@@ -10,6 +11,7 @@ router.post('/login', Controller.loginUser)
 router.get('/me',auth, Controller.getMe)
 router.get('/all-blogs',auth, Controller.getBlogs)
 router.post('/add-blog',auth, Controller.addBlog)
+router.post('/upload', upload.single('image'), Controller.addBlogImage)
 router.post('/filter-blogs',auth, Controller.filterBlogs)
 router.post('/delete-blog',auth, Controller.deleteBlog)
 router.post('/edit-blog',auth, Controller.updateBlog)
