@@ -108,9 +108,9 @@ const filterBlogs = async (req, res) => {
 
 //add blogpost
 const addBlog = async(req, res) => {
-    const {title, description, image} = req.body;
+    const {title, description} = req.body;
     try {
-        const newBlog = new blog({ title, description, image}) 
+        const newBlog = new blog({ title, description}) 
         const savedBlog = await newBlog.save()
         res.send(savedBlog)
     } catch (error) {
@@ -121,11 +121,20 @@ const addBlog = async(req, res) => {
 //add blogimage
 const addBlogImage = async(req, res) => {
         const  file = req.file;
+        const id = req.body.id;
         //error handling if file is not jpg or jpeg
         if(!file.originalname.match(/\.(jpg|jpeg)$/)){
             return res.status(400).send('Please upload a image file')
         }
-        res.send(file.filename)
+
+        const blogpost = await blog.findById(id)
+        if(blogpost){
+            blogpost.image = file.filename
+            const savedBlog = await blogpost.save()
+            res.send(savedBlog)
+        }else{
+            res.status(404).send('Blog not found')
+        }
     }
 
 

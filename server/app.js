@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require("express");
 const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
 const cors = require('cors');
 const  appRoutes = require("./routes/appRoutes")
 const adminRoutes = require("./routes/admin")
@@ -8,6 +9,11 @@ const adminRoutes = require("./routes/admin")
 
 
 const app = express();
+
+// Middleware
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 app.use(express.json());
 app.use(cors());
 app.use('/api', appRoutes);
