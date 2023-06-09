@@ -6,7 +6,6 @@ import Bloglists from '../components/Bloglists'
 const Admin = () => {
   const [posts, setPosts] = useState([])
   const [search, setSearch] = useState('')
-  const [isLoaded, setIsLoaded] = useState(false);
   const [postscopy, setPostscopy] = useState([])
 
 

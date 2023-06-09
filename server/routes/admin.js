@@ -15,6 +15,6 @@ router.post('/upload', upload.single('image'), Controller.addBlogImage)
 router.post('/filter-blogs',auth, Controller.filterBlogs)
 router.post('/delete-blog',auth, Controller.deleteBlog)
 router.post('/edit-blog',auth, Controller.updateBlog)
-router.get("/pin-blog", auth, Controller.pinBlog)
+router.post("/pin-blog", auth, Controller.pinBlog)
 
 module.exports = router;

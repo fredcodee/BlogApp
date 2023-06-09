@@ -172,15 +172,16 @@ const updateBlog = async(req, res) => {
 
 // pin blogpost
 const pinBlog = async(req, res) => {
+    // if blog.pin is true set it to false and vice versa
     const {id} = req.body;
     try {
-        await blog.updateOne({ _id: id }, {
+        const document = await blog.findById(id)
+        await blog.updateOne({ _id: document._id }, {
             $set: {
-                pin: true
-            }
+                pin: !document.pin
+            }   
         });
-        return res.json.json({message: 'Blog pinned successfully'})
-
+        return res.json({message: 'Blog pin updated successfully'})
     } catch (error) {
         errorHandler(error, res)
     }

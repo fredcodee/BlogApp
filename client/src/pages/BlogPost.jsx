@@ -7,7 +7,7 @@ import PinnedPosts from '../components/PinnedPosts'
 import example from '../assets/images/example.jpg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTwitter, faLinkedin,faFacebook } from '@fortawesome/free-brands-svg-icons';
-import { faPenToSquare,faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { faPenToSquare,faTrashCan, faMapPin } from '@fortawesome/free-solid-svg-icons';
 
 
 
@@ -61,7 +61,26 @@ const BlogPost = () => {
       );
   }
 
+  const pinBlog = async () => {
+    const token = localStorage.getItem('authTokens').replace(/"/g, '');
+    const body = {
+      id: id,
+    }
 
+    const response = await axios.post('/api/admin/pin-blog', body, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => {
+        window.location.reload();
+      }
+      )
+      .catch((error) => {
+        console.log(error);
+      }
+      );
+  }
   return (
     <div className='container'>
       <div>
@@ -69,10 +88,20 @@ const BlogPost = () => {
           {user ? (
             
             <div className='flex justify-center space-x-4 pb-3'> 
-              <Link to="/edit">
+              <Link to={`/edit/${blog._id}`} className='p-2'>
                 <FontAwesomeIcon icon={faPenToSquare} size="2x" color="#1DA1F2" />
               </Link>
-              <Link to="#">
+              {blog.pin ? ( 
+                <Link to="#" className='p-2'>
+                  <FontAwesomeIcon icon={faMapPin} size="2x" color="green" onClick={pinBlog} />
+                </Link>
+              ) : (
+                <Link to="#" className='p-2'>
+                  <FontAwesomeIcon icon={faMapPin} size="2x" color="orange" onClick={pinBlog} />
+                </Link>
+              )
+              }
+              <Link to="#" className='p-2'>
                 <FontAwesomeIcon icon={faTrashCan} size="2x" color="red"   onClick={() => setShowDeletePopup(true)}/>
               </Link>
             </div>
