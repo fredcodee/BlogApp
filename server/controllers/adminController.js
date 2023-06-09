@@ -120,6 +120,7 @@ const addBlog = async(req, res) => {
 
 //add blogimage
 const addBlogImage = async(req, res) => {
+    try {
         const  file = req.file;
         const id = req.body.id;
         //error handling if file is not jpg or jpeg
@@ -135,6 +136,11 @@ const addBlogImage = async(req, res) => {
         }else{
             res.status(404).send('Blog not found')
         }
+        
+    } catch (error) {
+        errorHandler(error, res)
+    }
+        
     }
 
 
@@ -152,15 +158,14 @@ const deleteBlog = async(req, res) => {
 
 //update blogpost
 const updateBlog = async(req, res) => {
-    const { title, description, image} = req.body;
+    const { id, title, description } = req.body;
     try {
         //find blog by id
-        const document = await blog.find({title: title})
+        const document = await blog.findById(id)
         await blog.updateOne({ _id: document._id }, {
             $set: {
                 title: title,
                 description: description,
-                image: image
             }
         });
         return res.json({message: 'Blog updated successfully'})
@@ -186,14 +191,6 @@ const pinBlog = async(req, res) => {
         errorHandler(error, res)
     }
 }
-
-
-
-
-
-
-
-
 
 
 //create a function to  handle token generation

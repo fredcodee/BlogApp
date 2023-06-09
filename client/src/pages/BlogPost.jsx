@@ -50,7 +50,6 @@ const BlogPost = () => {
       },
     })
       .then((response) => {
-        console.log(response.data)
         history('/admin-dashboard')
       }
       )
@@ -88,7 +87,7 @@ const BlogPost = () => {
           {user ? (
             
             <div className='flex justify-center space-x-4 pb-3'> 
-              <Link to={`/edit/${blog._id}`} className='p-2'>
+              <Link to={`/edit/${id}`} className='p-2'>
                 <FontAwesomeIcon icon={faPenToSquare} size="2x" color="#1DA1F2" />
               </Link>
               {blog.pin ? ( 

@@ -69,20 +69,24 @@ const Write = () => {
           Authorization: `Bearer ${token}`,
         },
       }).then(async (response) => {
-        //send image to server
-        const formData = new FormData();
-        formData.append('image', selectedFile);
-        formData.append('id', response.data._id);
-        try{
-            const imageResponse =await axios.post('/api/admin/upload', formData, {
-              headers: {
-                'Content-Type': 'multipart/form-data',
-              },
-            });
-            setSuccess('Blog and Image Added successfully.');
-        } catch (error) {
-          setErrors('Error uploading image.');
-        }
+        // send image to server if a file is selected
+        if (selectedFile) {
+          const formData = new FormData();
+          formData.append('image', selectedFile);
+          formData.append('id', response.data._id);
+          try {
+              const imageResponse = await axios.post('/api/admin/upload', formData, {
+                  headers: {
+                      'Content-Type': 'multipart/form-data',
+                  },
+              });
+              setSuccess('Blog and Image updated successfully.');
+          } catch (error) {
+              setErrors('Error uploading image.');
+          }
+      } else {
+          setSuccess('Blog updated successfully.');
+      }
       }).catch((error) => {
         setErrors('Error saving blog.');
       });
