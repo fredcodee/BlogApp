@@ -15,6 +15,7 @@ const Write = () => {
       [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
       ['bold', 'italic', 'underline', 'strike'],
       [{ 'color': [] }, { 'background': [] }],
+      [{ 'link': 'link' }],
       [{ 'align': [] }],
       ['clean'],
     ],
@@ -24,6 +25,7 @@ const Write = () => {
     'header',
     'bold', 'italic', 'underline', 'strike',
     'color', 'background',
+    'link',
     'align',
   ];
   const handleTitleChange = (event) => {
@@ -67,7 +69,6 @@ const Write = () => {
           Authorization: `Bearer ${token}`,
         },
       }).then(async (response) => {
-        console.log(response);
         //send image to server
         const formData = new FormData();
         formData.append('image', selectedFile);

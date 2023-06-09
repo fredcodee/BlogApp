@@ -1,5 +1,5 @@
 import React, { useContext }from 'react'
-import { useParams,Link } from 'react-router-dom'
+import { useParams,Link, useNavigate} from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import AuthContext from '../context/AuthContext'
@@ -12,10 +12,13 @@ import { faPenToSquare,faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
 
 
+
 const BlogPost = () => {
   const { id } = useParams()
   let [blog, setBlog] = useState({})
   let { user } = useContext(AuthContext)
+  const [showDeletePopup, setShowDeletePopup] = useState(false);
+  const history = useNavigate()
 
   useEffect(() => {
     getBlog()
@@ -36,6 +39,29 @@ const BlogPost = () => {
       });
   }
 
+  const handleDelete  = async () => {
+    const token = localStorage.getItem('authTokens').replace(/"/g, '');
+    const body = {        
+      id: id,
+    }
+    const response = await axios.post('/api/admin/delete-blog',body, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => {
+        console.log(response.data)
+        history('/admin-dashboard')
+      }
+      )
+      .catch((error) => {
+        console.log(error);
+        setShowDeletePopup(false)
+      }
+      );
+  }
+
+
   return (
     <div className='container'>
       <div>
@@ -46,8 +72,8 @@ const BlogPost = () => {
               <Link to="/edit">
                 <FontAwesomeIcon icon={faPenToSquare} size="2x" color="#1DA1F2" />
               </Link>
-              <Link to="/delete">
-                <FontAwesomeIcon icon={faTrashCan} size="2x" color="red" />
+              <Link to="#">
+                <FontAwesomeIcon icon={faTrashCan} size="2x" color="red"   onClick={() => setShowDeletePopup(true)}/>
               </Link>
             </div>
           ) : null}
@@ -64,7 +90,7 @@ const BlogPost = () => {
 
       <div>
         <div className='text-center p-3 text-gray-500'>
-          <h3>Share this post with your friends</h3>
+          <h3>Share this blog post with your friends</h3>
         </div>
         <div className="flex justify-center space-x-4 ">
           <Link to="https://twitter.com/fredcode_" className="no-underline">
@@ -86,6 +112,22 @@ const BlogPost = () => {
         <PinnedPosts />
         <hr />
       </div>
+      {showDeletePopup && (
+        <div className="fixed inset-0 flex justify-center items-center bg-gray-500 bg-opacity-50">
+          <div className="bg-white p-4 rounded-md">
+            <h2 className="text-xl font-bold">Delete Confirmation</h2>
+            <p>Are you sure you want to delete this blog?</p>
+            <div className="flex justify-end mt-4">
+              <button className="px-4 py-2 bg-red-500 text-white rounded-md" onClick={handleDelete}>
+                Delete
+              </button>
+              <button className="px-4 py-2 bg-gray-300 text-gray-700 rounded-md ml-2" onClick={() => setShowDeletePopup(false)}>
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
     </div>
   )

@@ -75,7 +75,7 @@ const loginUser = async(req, res) => {
 
 const getMe = async (req, res) => {
     try {
-        res.send(req.user.email)
+        return res.json(req.user.email)
     } catch (error) {
         errorHandler(error, res)
     }
@@ -87,7 +87,7 @@ const getBlogs = async(req, res) => {
     try {
         //sort blogs by date created from newest to oldest
         const blogposts = await blog.find().sort({date: -1})
-        res.send(blogposts)
+        return res.json(blogposts)
     } catch (error) {
         errorHandler(error, res)
     }
@@ -98,7 +98,7 @@ const filterBlogs = async (req, res) => {
     const { title } = req.body;
     try {
       const blogposts = await blog.find({ title: { $regex: title, $options: 'i' } });
-      res.send(blogposts);
+      return res.json(blogposts);
     } catch (error) {
       errorHandler(error, res);
     }
@@ -112,7 +112,7 @@ const addBlog = async(req, res) => {
     try {
         const newBlog = new blog({ title, description}) 
         const savedBlog = await newBlog.save()
-        res.send(savedBlog)
+        return res.json(savedBlog)
     } catch (error) {
         errorHandler(error, res)
     }
@@ -123,7 +123,7 @@ const addBlogImage = async(req, res) => {
         const  file = req.file;
         const id = req.body.id;
         //error handling if file is not jpg or jpeg
-        if(!file.originalname.match(/\.(jpg|jpeg)$/)){
+        if(!file.originalname.match(/\.(jpg|jpeg|png)$/)){
             return res.status(400).send('Please upload a image file')
         }
 
@@ -131,7 +131,7 @@ const addBlogImage = async(req, res) => {
         if(blogpost){
             blogpost.image = file.filename
             const savedBlog = await blogpost.save()
-            res.send(savedBlog)
+            return res.json(savedBlog)
         }else{
             res.status(404).send('Blog not found')
         }
@@ -143,7 +143,7 @@ const deleteBlog = async(req, res) => {
     const {id} = req.body;
     try {
         const deletedBlog = await blog.findByIdAndDelete(id)
-        res.send.json({message: 'Blog deleted successfully'})
+        return res.json({message: 'Blog deleted successfully'})
     } catch (error) {
         errorHandler(error, res)
     }
@@ -163,7 +163,7 @@ const updateBlog = async(req, res) => {
                 image: image
             }
         });
-        res.send.json({message: 'Blog updated successfully'})
+        return res.json({message: 'Blog updated successfully'})
 
     } catch (error) {
         errorHandler(error, res)
@@ -179,7 +179,7 @@ const pinBlog = async(req, res) => {
                 pin: true
             }
         });
-        res.send.json({message: 'Blog pinned successfully'})
+        return res.json.json({message: 'Blog pinned successfully'})
 
     } catch (error) {
         errorHandler(error, res)
