@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import AuthContext from '../context/AuthContext'
 import PinnedPosts from '../components/PinnedPosts'
-import example from '../assets/images/example2.jpg'
+import example from '../assets/images/example.jpg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTwitter, faLinkedin,faFacebook } from '@fortawesome/free-brands-svg-icons';
 import { faPenToSquare,faTrashCan } from '@fortawesome/free-solid-svg-icons';
@@ -58,7 +58,7 @@ const BlogPost = () => {
       </div>
 
       <div className='min-h-[300px] lg:min-h-[400px]'>
-        <img src={blog.image ? blog.image : example} className='w-full h-full object-cover rounded-xl' />
+        <img src={blog.image ? `/uploads/${blog.image}` : example} className='w-full h-full object-cover rounded-xl' />
       </div>
       <div className='mt-4 mb-5' dangerouslySetInnerHTML={{ __html: blog.description }}></div>
 
