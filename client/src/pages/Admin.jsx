@@ -70,16 +70,12 @@ const Admin = () => {
           <script src="https://unpkg.com/flowbite@1.4.0/dist/flowbite.js"></script>
         </div>
       </div>
-      <div className="allBlogs">
+      <div className="allBlogs mb-4">
         <div>
           <h2 className='text-lg'>Blogs Posted</h2>
           <hr />
         </div>
         <Bloglists posts={posts} />
-
-        <div>
-
-        </div>
       </div>
 
 

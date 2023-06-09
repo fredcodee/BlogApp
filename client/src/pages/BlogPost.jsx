@@ -51,7 +51,7 @@ const BlogPost = () => {
               </Link>
             </div>
           ) : null}
-          <h1 className='text-5xl md:text-6xl leading-tighter tracking-tight font-bold'>Blog Title</h1> 
+          <h1 className='text-5xl md:text-6xl leading-tighter tracking-tight font-bold'>{blog.title}</h1> 
           <p className='p-3'>Written by Fredcode</p>
         </div>
         <hr />
@@ -60,16 +60,7 @@ const BlogPost = () => {
       <div className='min-h-[300px] lg:min-h-[400px]'>
         <img src={blog.image ? blog.image : example} className='w-full h-full object-cover rounded-xl' />
       </div>
-
-
-      <div className='mt-4 mb-5'>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Earum totam delectus, beatae eos ad obcaecati unde explicabo? Necessitatibus molestias eos,
-        illum nihil similique unde ducimus porro sunt explicabo minus. Doloremque!
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis quia numquam molestias aliquam nam eum odit quas dicta, itaque totam perferendis impedit,
-        reprehenderit consequuntur corrupti, eveniet eligendi dolores. Quaerat, illum.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam, at. Minus pariatur molestias, incidunt id ea nihil sed, 
-        facere quasi similique quas eos modi laborum corrupti. Laborum ipsa sed nulla.
-      </div>
+      <div className='mt-4 mb-5' dangerouslySetInnerHTML={{ __html: blog.description }}></div>
 
       <div>
         <div className='text-center p-3 text-gray-500'>
