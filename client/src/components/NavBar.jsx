@@ -1,10 +1,18 @@
 import React, { useContext } from 'react'
 import logo from '../assets/images/logo.jpg'
-import { Link } from 'react-router-dom'
+import { Link} from 'react-router-dom'
 import AuthContext from '../context/AuthContext'
 
 const NavBar = () => {
   let { user } = useContext(AuthContext)
+
+  //logot and delete tokens in local storage
+  const handleLogout = () => {
+    localStorage.removeItem('authTokens')
+    localStorage.removeItem('user')
+    window.location.reload()
+  }
+
   return (
     <div className=''>
       <nav className="relative container mx-auto p-6">
@@ -20,7 +28,7 @@ const NavBar = () => {
               <Link to="/admin-dashboard" className="text-slate-600 font-medium hover:text-darkOrange text-lg no-underline">Admin-Dashboard</Link>
               <Link to="/write" className="text-blue-400 font-medium hover:text-darkOrange text-lg no-underline ">New Post</Link>
               <Link to="/users" className="text-slate-600 font-medium hover:text-darkOrange text-lg no-underline">User Management</Link>
-              <Link to="/logout" className=" font-medium text-red-500 hover:text-blue text-lg no-underline">Logout</Link>
+              <Link className=" font-medium text-red-500 hover:text-blue text-lg no-underline" onClick={handleLogout}>Logout</Link>
             </div>
           ) : (
             <div className="hidden md:flex space-x-10">
