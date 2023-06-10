@@ -1,13 +1,13 @@
-import React, { useContext }from 'react'
-import { useParams,Link, useNavigate} from 'react-router-dom'
+import React, { useContext } from 'react'
+import { useParams, Link, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import AuthContext from '../context/AuthContext'
 import PinnedPosts from '../components/PinnedPosts'
 import example from '../assets/images/example.jpg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTwitter, faLinkedin,faFacebook } from '@fortawesome/free-brands-svg-icons';
-import { faPenToSquare,faTrashCan, faMapPin } from '@fortawesome/free-solid-svg-icons';
+import { faTwitter, faLinkedin, faFacebook } from '@fortawesome/free-brands-svg-icons';
+import { faPenToSquare, faTrashCan, faMapPin } from '@fortawesome/free-solid-svg-icons';
 
 
 
@@ -18,10 +18,12 @@ const BlogPost = () => {
   let [blog, setBlog] = useState({})
   let { user } = useContext(AuthContext)
   const [showDeletePopup, setShowDeletePopup] = useState(false);
+  const [picks, setPicks] = useState([])
   const history = useNavigate()
 
   useEffect(() => {
-    getBlog()
+    getBlog(),
+      randomBlogs()
   }, [])
 
   const getBlog = async () => {
@@ -39,12 +41,27 @@ const BlogPost = () => {
       });
   }
 
-  const handleDelete  = async () => {
+  const randomBlogs = async () => {
+    let config = {
+      method: 'get',
+      url: '/api/random-pinned-blogs',
+    };
+    await axios.request(config)
+      .then((response) => {
+        setPicks(response.data)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+
+  const handleDelete = async () => {
     const token = localStorage.getItem('authTokens').replace(/"/g, '');
-    const body = {        
+    const body = {
       id: id,
     }
-    const response = await axios.post('/api/admin/delete-blog',body, {
+    const response = await axios.post('/api/admin/delete-blog', body, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -85,12 +102,12 @@ const BlogPost = () => {
       <div>
         <div className='text-center p-3'>
           {user ? (
-            
-            <div className='flex justify-center space-x-4 pb-3'> 
+
+            <div className='flex justify-center space-x-4 pb-3'>
               <Link to={`/edit/${id}`} className='p-2'>
                 <FontAwesomeIcon icon={faPenToSquare} size="2x" color="#1DA1F2" />
               </Link>
-              {blog.pin ? ( 
+              {blog.pin ? (
                 <Link to="#" className='p-2'>
                   <FontAwesomeIcon icon={faMapPin} size="2x" color="green" onClick={pinBlog} />
                 </Link>
@@ -101,11 +118,11 @@ const BlogPost = () => {
               )
               }
               <Link to="#" className='p-2'>
-                <FontAwesomeIcon icon={faTrashCan} size="2x" color="red"   onClick={() => setShowDeletePopup(true)}/>
+                <FontAwesomeIcon icon={faTrashCan} size="2x" color="red" onClick={() => setShowDeletePopup(true)} />
               </Link>
             </div>
           ) : null}
-          <h1 className='text-5xl md:text-6xl leading-tighter tracking-tight font-bold'>{blog.title}</h1> 
+          <h1 className='text-5xl md:text-6xl leading-tighter tracking-tight font-bold'>{blog.title}</h1>
           <p className='p-3'>Written by Fredcode</p>
         </div>
         <hr />
@@ -125,7 +142,7 @@ const BlogPost = () => {
             <FontAwesomeIcon icon={faTwitter} size="2x" color="#1DA1F2" className="my-twitter-icon" />
           </Link>
           <Link to="/" className="no-underline">
-            <FontAwesomeIcon icon={faFacebook} size="2x" color="#1DA1F2"/>
+            <FontAwesomeIcon icon={faFacebook} size="2x" color="#1DA1F2" />
           </Link>
           <Link to="https://www.linkedin.com/in/wilfred-chukwu-891830174/" className="no-underline">
             <FontAwesomeIcon icon={faLinkedin} size="2x" color="#1DA1F2" className="my-linkedin-icon" />
@@ -137,7 +154,7 @@ const BlogPost = () => {
         <div className='pt-3'>
           <h2 className='text-2xl font-bold'>ARTICLES YOU MAY LIKE</h2>
         </div>
-        <PinnedPosts />
+        <PinnedPosts  randomPins={picks}/>
         <hr />
       </div>
       {showDeletePopup && (

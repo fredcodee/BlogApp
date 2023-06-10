@@ -21,7 +21,7 @@ const getRandomPinnedBlogs = async(req,res) => {
     try {
         const pinnedBlogs = await blog.find({ pin: true }); // find all pinned blogs
         const randomPinnedBlogs = pinnedBlogs.sort(() => 0.5 - Math.random()); // shuffle the array of pinned blogs
-        res.send(randomPinnedBlogs.slice(0, 3)); // get the first 3 blogs
+        res.json(randomPinnedBlogs.slice(0, 3)); // get the first 3 blogs
       } catch (error) {
         errorHandler(error, res)
       }
@@ -33,7 +33,7 @@ const getSingleBlog = async(req, res) => {
     const {id} = req.params;
     try {
         const singleBlog = await blog.findById(id)
-        res.send(singleBlog)
+        res.json(singleBlog)
     } catch (error) {
         errorHandler(error, res)
     }

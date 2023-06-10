@@ -24,8 +24,8 @@ const Bloglists = ({ posts }) => {
                                         </tr>
                                     </thead>
                                     <tbody className="text-sm divide-y divide-gray-100">
-                                        {posts.map((post) => (
-                                            <tr key={post._id}>
+                                        {posts.map((post, index) => (
+                                            <tr key={index}>
                                                 <td className="p-2 whitespace-nowrap">
                                                 <Link to={`/blog/${post._id}`} className='no-underline'>
                                                     <div className="flex items-center">
