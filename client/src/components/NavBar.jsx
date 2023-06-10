@@ -19,7 +19,7 @@ const NavBar = () => {
               <Link to="/blog" className="text-slate-600 font-medium hover:text-darkOrange text-lg no-underline">Blog</Link>
               <Link to="/admin-dashboard" className="text-slate-600 font-medium hover:text-darkOrange text-lg no-underline">Admin-Dashboard</Link>
               <Link to="/write" className="text-blue-400 font-medium hover:text-darkOrange text-lg no-underline ">New Post</Link>
-              <Link to="/contact" className="text-slate-600 font-medium hover:text-darkOrange text-lg no-underline">User Management</Link>
+              <Link to="/users" className="text-slate-600 font-medium hover:text-darkOrange text-lg no-underline">User Management</Link>
               <Link to="/logout" className=" font-medium text-red-500 hover:text-blue text-lg no-underline">Logout</Link>
             </div>
           ) : (

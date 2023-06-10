@@ -198,6 +198,36 @@ const createToken = (id) => {
     return jwt.sign({id}, process.env.JWT_SECRET, {expiresIn: '30d'})
 }
 
+
+//get all user
+const getUsers = async(req, res) => {
+    try {
+        const users = await user.find()
+        return res.json(users)
+    } catch (error) {
+        errorHandler(error, res)
+    }
+}
+
+//delete user
+const deleteUser = async(req, res) => {
+    const {id} = req.body;
+    try {
+        if (req.user._id == id) {
+            return res.status(400).json({message: 'You cannot delete yourself'})
+        }
+        if (req.user.email !== 'fredcode23@gmail.com' || req.user.email !== 'wilfredchukwu1@gmail.com') {
+            return res.status(400).json({message: 'You are not authorized to delete user'})
+        }
+        const deletedUser = await user.findByIdAndDelete(id)
+        return res.json({message: 'User deleted successfully'})
+    } catch (error) {
+        errorHandler(error, res)
+    }
+}
+
+
+
 // error handler
 function errorHandler(error, res) {
     return res.status(500).json({
@@ -209,6 +239,8 @@ function errorHandler(error, res) {
 
 
 
+
+
 module.exports = {
-    health, registerUser, loginUser, getMe, getBlogs, addBlog, filterBlogs, deleteBlog,  updateBlog, pinBlog, checkPasscode, addBlogImage
+    health, registerUser, loginUser, getMe, getBlogs, addBlog, filterBlogs, deleteBlog,  updateBlog, pinBlog, checkPasscode, addBlogImage, getUsers, deleteUser
 }

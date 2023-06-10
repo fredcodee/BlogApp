@@ -12,6 +12,7 @@ import BlogPost from './pages/BlogPost';
 import Contact from './pages/Contact';
 import Write from './pages/Write';
 import Edit from './pages/Edit';
+import Users from './pages/Users';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import { AuthProvider } from './context/AuthContext';
@@ -35,6 +36,7 @@ function App() {
             <Route element = {<PrivateRoute> <Admin /></PrivateRoute>} path = "/admin-dashboard" /> 
             <Route element = {<PrivateRoute> <Write /></PrivateRoute>} path = "/write" />
             <Route element = {<PrivateRoute> <Edit /></PrivateRoute>} path = "/edit/:id" />
+            <Route element = {<PrivateRoute> <Users /></PrivateRoute>} path = "/users" />
 
         </Routes>
         <Footer/>

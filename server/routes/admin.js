@@ -16,5 +16,7 @@ router.post('/filter-blogs',auth, Controller.filterBlogs)
 router.post('/delete-blog',auth, Controller.deleteBlog)
 router.post('/edit-blog',auth, Controller.updateBlog)
 router.post("/pin-blog", auth, Controller.pinBlog)
+router.get('/get-users',auth, Controller.getUsers)
+router.post('/delete-user',auth, Controller.deleteUser)
 
 module.exports = router;
