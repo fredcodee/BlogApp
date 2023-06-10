@@ -97,6 +97,31 @@ const BlogPost = () => {
       }
       );
   }
+
+  const handleShare = async(social) => {
+    const url = window.location.href; 
+    const title = blog.title; 
+
+    // Create the sharing URLs for each social media platform
+    const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+    const twitterUrl = `https://twitter.com/share?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`;
+    const linkedinUrl = `https://www.linkedin.com/shareArticle?url=${encodeURIComponent(url)}&title=${encodeURIComponent(title)}`;
+
+    // Open the sharing URLs in new tabs
+    if (social === 'facebook') {
+      window.open(facebookUrl, '_blank');
+    }
+    if (social === 'twitter') {
+      window.open(twitterUrl, '_blank');
+    }
+    if (social === 'linkedin') {
+      window.open(linkedinUrl, '_blank');
+    }
+
+  };
+
+
+
   return (
     <div className='container'>
       <div>
@@ -138,14 +163,14 @@ const BlogPost = () => {
           <h3>Share this blog post with your friends</h3>
         </div>
         <div className="flex justify-center space-x-4 ">
-          <Link to="https://twitter.com/fredcode_" className="no-underline">
-            <FontAwesomeIcon icon={faTwitter} size="2x" color="#1DA1F2" className="my-twitter-icon" />
+          <Link>
+            <FontAwesomeIcon icon={faTwitter} size="2x" color="#1DA1F2" className="my-twitter-icon" onClick={() => handleShare('twitter')} />
           </Link>
-          <Link to="/" className="no-underline">
-            <FontAwesomeIcon icon={faFacebook} size="2x" color="#1DA1F2" />
+          <Link>
+            <FontAwesomeIcon icon={faFacebook} size="2x" color="#1DA1F2" onClick={() => handleShare('facebook')} />
           </Link>
-          <Link to="https://www.linkedin.com/in/wilfred-chukwu-891830174/" className="no-underline">
-            <FontAwesomeIcon icon={faLinkedin} size="2x" color="#1DA1F2" className="my-linkedin-icon" />
+          <Link>
+            <FontAwesomeIcon icon={faLinkedin} size="2x" color="#1DA1F2" className="my-linkedin-icon" onClick={() => handleShare('linkedin')} />
           </Link>
         </div>
       </div>

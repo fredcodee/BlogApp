@@ -6,7 +6,7 @@ const Blog = () => {
   return (
     <div>
       <div className='text-center p-6'>
-        <h1 className='text-5xl md:text-6xl leading-tighter font-medium  tracking-tighter'>THE FREDCODE BLOG</h1>
+        <h1 className='text-5xl md:text-6xl leading-tighter font-medium  tracking-tighter'>The FredCode Blog</h1>
         <small className='text-base'>Welcome Nerds 🤓, Feel At Home While I Document My Software Developer Journey 📒🗨️</small>
       </div>
       <hr className='container'/>
