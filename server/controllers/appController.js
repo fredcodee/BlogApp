@@ -2,18 +2,24 @@ const blog = require('../models/blogModel')
 const nodemailer = require('nodemailer')
 
 
-const getBlogs = async(req, res) => {
+const getBlogs = async (req, res) => {
     try {
-        const blogs = await blog.find({}).sort({date: -1})
-        const page =req.query.page || 1;
-        const paginatedBlogs = paginate(blogs, 9)
-        const  totalpages = paginatedBlogs.length
-        res.send({blogs: paginatedBlogs[page - 1], totalpages})
+      const blogs = await blog.find({}).sort({ date: -1 });
+      const page = req.body.page || 1;
+      const pageSize = 9;
+      const totalBlogs = blogs.length;
+      const totalPages = Math.ceil(totalBlogs / pageSize);
+  
+      const startIndex = (page - 1) * pageSize;
+      const endIndex = page * pageSize;
+      const paginatedBlogs = blogs.slice(startIndex, endIndex);
+  
+      res.json({ blogs: paginatedBlogs, totalPages });
     } catch (error) {
-        errorHandler(error, res)
+      errorHandler(error, res);
     }
-
-}
+  };
+  
 
 
 // get 3 random blogs with pin set to true
@@ -71,21 +77,6 @@ const sendEmail = async(req, res) => {
     }
 }
 
-
-// app functions 
-// paginate  function
-function paginate(data, itemsPerPage) {
-    const pages = Math.ceil(data.length / itemsPerPage);
-    const paginatedData = [];
-  
-    for (let i = 0; i < pages; i++) {
-      const start = i * itemsPerPage;
-      const end = start + itemsPerPage;
-      paginatedData.push(data.slice(start, end));
-    }
-  
-    return paginatedData;
-  }
 
 // error handler
 function errorHandler(error, res) {
