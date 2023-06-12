@@ -12,6 +12,7 @@ const Contact = () => {
     const [email, setEmail] = useState("");
     const [message, setMessage] = useState("");
     const [success, setSuccess] = useState(false);
+    const [error, setError] = useState(false);
 
     let handleSubmit = async (e) => {
         e.preventDefault();
@@ -30,12 +31,12 @@ const Contact = () => {
 
         await axios.request(config)
             .then((response) => {
-                console.log(response.data)
+                setError(false)
                 setSuccess(true)
                 e.target.reset()
             })
-            .catch((error) => {
-                console.log(error)
+            .catch((error) => {  
+                setError(true)
             });
     };
 
@@ -85,6 +86,7 @@ const Contact = () => {
                     </div>
                     <div className='text-center'>
                         {success && <p className="text-green-500 text-lg">Message sent successfully 🙂</p>}
+                        {error && <p className="text-red-500 text-lg">Message not sent. Please try again Later😞</p>}
                     </div>
                     <button className="flex flex-wrap items-center gap-2 group tracking-tight font-medium cursor-pointer rounded-lg px-6 py-3 text-lg bg-blue-400 text-primary-50 hover:bg-primary-800 w-full justify-center mt-8" type='submit'>
                         <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 512 512" className="transition-transform h-7 w-7 order-last group-hover:translate-x-2" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">

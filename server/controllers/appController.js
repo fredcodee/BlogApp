@@ -42,7 +42,6 @@ const getSingleBlog = async(req, res) => {
 // contact form send email
 const sendEmail = async(req, res) => {
     const {name, email, message} = req.body;
-    console.log(req.body)
     try {
         const transporter = nodemailer.createTransport({
             service: process.env.MAIL_SERVICE,
@@ -61,11 +60,10 @@ const sendEmail = async(req, res) => {
 
         transporter.sendMail(mailOptions, (error, info) => {
             if(error) {
-                console.log(error)
-                res.send('error')
+                res.status(500).json(error)
             } else {
                 console.log('Email sent: ' + info.response)
-                res.send('success')
+                res.json('email sent successfully')
             }
         })
     } catch (error) {
