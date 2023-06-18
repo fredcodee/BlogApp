@@ -1,0 +1,10 @@
+.ql-syntax{
+    background-color: #23241f;
+    color: #f8f8f2;
+    font-family: monospace;
+    white-space: pre;
+    word-wrap: normal;
+    padding: 1em;
+    margin: 0;
+    overflow: auto;
+}

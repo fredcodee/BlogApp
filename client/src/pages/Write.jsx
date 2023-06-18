@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import axios from 'axios';
+import '../assets/css/editor.css';
 
 const Write = () => {
   const [title, setTitle] = useState('');
@@ -27,8 +28,9 @@ const Write = () => {
         [{ 'link': 'link' }],
         [{ 'image': 'image' }],
         [{ 'align': [] }],
+        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
         ['clean'],
-        ['code-block']
+        ['code-block'],
       ]
     }
   };
@@ -40,6 +42,7 @@ const Write = () => {
     'link',
     'image',
     'align',
+    'list', 'bullet',
     'code-block'
   ];
   const handleTitleChange = (event) => {
@@ -134,7 +137,7 @@ const Write = () => {
             setErrors('Error uploading image.');
           }
         } else {
-          setSuccess('Blog updated successfully.');
+          setSuccess('Blog posted successfully. but no image uploaded.');
         }
       }).catch((error) => {
         setErrors('Error saving blog.');
