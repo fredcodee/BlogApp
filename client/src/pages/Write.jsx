@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect} from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import axios from 'axios';
@@ -9,7 +9,7 @@ const Write = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [errors, setErrors] = useState('');
   const [success, setSuccess] = useState('');
-  const quillRef = useRef(null); 
+  const quillRef = useRef(null);
 
   useEffect(() => {
     if (quillRef.current) {
@@ -45,7 +45,7 @@ const Write = () => {
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
   };
-  
+
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     setSelectedFile(file);
@@ -73,13 +73,22 @@ const Write = () => {
         console.log(response.data);
         const range = quillRef.current.getEditor().getSelection();
         const index = range ? range.index : 0;
-        quillRef.current.getEditor().insertEmbed(index, 'image', response.data);
+        const imageUrl = response.data;
+
+        // Apply Tailwind CSS classes to the inserted image
+        const imageElement = document.createElement('img');
+        imageElement.setAttribute('src', imageUrl);
+        imageElement.setAttribute('class', 'max-w-full h-auto');
+
+        // Insert the modified image into the editor
+        quillRef.current.getEditor().insertEmbed(index, 'image', imageUrl);
       } catch (error) {
         console.log('Error uploading file:', error);
       }
     };
   };
-  
+
+
 
   const saveToDatabase = async () => {
     try {
@@ -115,18 +124,18 @@ const Write = () => {
           formData.append('image', selectedFile);
           formData.append('id', response.data._id);
           try {
-              const imageResponse = await axios.post('/api/admin/upload', formData, {
-                  headers: {
-                      'Content-Type': 'multipart/form-data',
-                  },
-              });
-              setSuccess('Blog and Image updated successfully.');
+            const imageResponse = await axios.post('/api/admin/upload', formData, {
+              headers: {
+                'Content-Type': 'multipart/form-data',
+              },
+            });
+            setSuccess('Blog and Image updated successfully.');
           } catch (error) {
-              setErrors('Error uploading image.');
+            setErrors('Error uploading image.');
           }
-      } else {
+        } else {
           setSuccess('Blog updated successfully.');
-      }
+        }
       }).catch((error) => {
         setErrors('Error saving blog.');
       });
@@ -135,15 +144,15 @@ const Write = () => {
     }
   };
 
-  
+
   return (
     <div className='container mb-8'>
       <div>
-        <input type="text" placeholder='Title of The Blog'  onChange={handleTitleChange}/>
+        <input type="text" placeholder='Title of The Blog' onChange={handleTitleChange} />
         <hr />
-        <div> 
+        <div>
           <label htmlFor="">Blog Image</label>
-          <input type="file"  onChange={handleFileChange} style={{margin:"0"}}/>
+          <input type="file" onChange={handleFileChange} style={{ margin: "0" }} />
         </div>
         <div>
           <label htmlFor="">Write</label>
@@ -157,7 +166,7 @@ const Write = () => {
           />
         </div>
         <div className='text-center pt-3'>
-          <button className='btn btn-primary'  onClick={saveToDatabase} >Publish</button>
+          <button className='btn btn-primary' onClick={saveToDatabase} >Publish</button>
         </div>
         <div className='text-center pt-4'>
           {errors && <p className='text-danger'>{errors} ☹️</p>}
