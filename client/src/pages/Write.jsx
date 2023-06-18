@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef} from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import axios from 'axios';
@@ -9,16 +9,26 @@ const Write = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [errors, setErrors] = useState('');
   const [success, setSuccess] = useState('');
+  const quillRef = useRef();
+
 
   const modules = {
-    toolbar: [
-      [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-      ['bold', 'italic', 'underline', 'strike'],
-      [{ 'color': [] }, { 'background': [] }],
-      [{ 'link': 'link' }],
-      [{ 'align': [] }],
-      ['clean'],
-    ],
+    toolbar: {
+      container: [
+        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+        ['bold', 'italic', 'underline', 'strike'],
+        [{ 'color': [] }, { 'background': [] }],
+        [{ 'link': 'link' }],
+        [{'image': 'image'}],
+        [{ 'align': [] }],
+        ['clean'],
+        ['code-block']
+      ],
+      handlers: {
+        'image': () => quillImageCallBack(quillRef.current?.getEditor()),
+      }
+    }
+
   };
 
   const formats = [
@@ -26,8 +36,11 @@ const Write = () => {
     'bold', 'italic', 'underline', 'strike',
     'color', 'background',
     'link',
+    'image',
     'align',
+    'code-block'
   ];
+
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
   };
@@ -40,6 +53,32 @@ const Write = () => {
   const handleChange = (value) => {
     setValue(value);
   };
+
+  const quillImageCallBack = (quill) => {
+    if (quill) {
+      const input = document.createElement('input');
+      input.setAttribute('type', 'file');
+      input.setAttribute('accept', 'image/*');
+      input.click();
+      input.onchange = async () => {
+        const file = input.files[0];
+        const formData = new FormData();
+        formData.append('image', file);
+        try {
+          const response = await axios.post('/api/admin/upload-images', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+          });
+          console.log(response.data);
+          const range = quill.getSelection(true);
+          quill.insertEmbed(range.index, 'image', response.data);
+        } catch (error) {
+          console.log('Error uploading file:', error);
+        }
+      };
+    }
+  }
 
   const saveToDatabase = async () => {
     try {
@@ -94,6 +133,7 @@ const Write = () => {
       setErrors('Error uploading file.');
     }
   };
+
   
   return (
     <div className='container mb-8'>
@@ -107,6 +147,7 @@ const Write = () => {
         <div>
           <label htmlFor="">Write</label>
           <ReactQuill
+            ref={quillRef}
             theme="snow"
             value={value}
             onChange={handleChange}
