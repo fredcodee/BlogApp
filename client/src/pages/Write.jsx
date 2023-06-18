@@ -1,4 +1,4 @@
-import React, { useState, useRef} from 'react';
+import React, { useState, useRef, useEffect} from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import axios from 'axios';
@@ -9,8 +9,14 @@ const Write = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [errors, setErrors] = useState('');
   const [success, setSuccess] = useState('');
-  const quillRef = useRef();
+  const quillRef = useRef(null); 
 
+  useEffect(() => {
+    if (quillRef.current) {
+      const editor = quillRef.current.getEditor();
+      editor.getModule('toolbar').addHandler('image', () => quillImageCallBack());
+    }
+  }, []);
 
   const modules = {
     toolbar: {
@@ -19,16 +25,12 @@ const Write = () => {
         ['bold', 'italic', 'underline', 'strike'],
         [{ 'color': [] }, { 'background': [] }],
         [{ 'link': 'link' }],
-        [{'image': 'image'}],
+        [{ 'image': 'image' }],
         [{ 'align': [] }],
         ['clean'],
         ['code-block']
-      ],
-      handlers: {
-        'image': () => quillImageCallBack(quillRef.current?.getEditor()),
-      }
+      ]
     }
-
   };
 
   const formats = [
@@ -40,7 +42,6 @@ const Write = () => {
     'align',
     'code-block'
   ];
-
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
   };
@@ -54,31 +55,31 @@ const Write = () => {
     setValue(value);
   };
 
-  const quillImageCallBack = (quill) => {
-    if (quill) {
-      const input = document.createElement('input');
-      input.setAttribute('type', 'file');
-      input.setAttribute('accept', 'image/*');
-      input.click();
-      input.onchange = async () => {
-        const file = input.files[0];
-        const formData = new FormData();
-        formData.append('image', file);
-        try {
-          const response = await axios.post('/api/admin/upload-images', formData, {
-            headers: {
-              'Content-Type': 'multipart/form-data',
-            },
-          });
-          console.log(response.data);
-          const range = quill.getSelection(true);
-          quill.insertEmbed(range.index, 'image', response.data);
-        } catch (error) {
-          console.log('Error uploading file:', error);
-        }
-      };
-    }
-  }
+  const quillImageCallBack = () => {
+    const input = document.createElement('input');
+    input.setAttribute('type', 'file');
+    input.setAttribute('accept', 'image/*');
+    input.click();
+    input.onchange = async () => {
+      const file = input.files[0];
+      const formData = new FormData();
+      formData.append('image', file);
+      try {
+        const response = await axios.post('/api/admin/upload-images', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+        console.log(response.data);
+        const range = quillRef.current.getEditor().getSelection();
+        const index = range ? range.index : 0;
+        quillRef.current.getEditor().insertEmbed(index, 'image', response.data);
+      } catch (error) {
+        console.log('Error uploading file:', error);
+      }
+    };
+  };
+  
 
   const saveToDatabase = async () => {
     try {

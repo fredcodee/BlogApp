@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs')
 const user = require('../models/userModel')
 const blog = require('../models/blogModel')
 const image = require('../models/image')
+const fs = require('fs')
 
 
 const health = async (req, res) => {
@@ -168,6 +169,16 @@ const addContentImage = async (req, res) => {
 const deleteBlog = async (req, res) => {
     const { id } = req.body;
     try {
+        //find blog by id and delete the image from uploads folder
+        const blogpost = await blog.findById(id)
+        const image = blogpost.image
+        fs.unlink(`../client/public/uploads/${image}`, (err) => {
+            if (err) {
+                console.error(err)
+                return
+            }
+        })
+        //delete blogpost from database
         const deletedBlog = await blog.findByIdAndDelete(id)
         return res.json({ message: 'Blog deleted successfully' })
     } catch (error) {
