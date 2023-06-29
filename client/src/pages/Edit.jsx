@@ -5,7 +5,7 @@ import 'react-quill/dist/quill.snow.css';
 import axios from 'axios';
 
 const EditBlog = () => {
-    const { title } = useParams()
+    const { id } = useParams()
     const [blogtitle, setBlogtitle] = useState('');
     const [value, setValue] = useState('');
     const [selectedFile, setSelectedFile] = useState(null);
@@ -37,7 +37,7 @@ const EditBlog = () => {
 
     const fetchBlogData = async () => {
         try {
-            const response = await axios.get(`/api/single-blog/${title}`);
+            const response = await axios.get(`/api/single-blog/${id}`);
             const blogData = response.data;
             setBlogtitle(blogData.title);
             setValue(blogData.description);

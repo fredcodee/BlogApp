@@ -36,9 +36,9 @@ const getRandomPinnedBlogs = async(req,res) => {
 
 // create a function to view a single blog
 const getSingleBlog = async(req, res) => {
-    const {title} = req.params;
+    const {id} = req.params;
     try {
-        const singleBlog = await blog.findOne({title: title})
+        const singleBlog = await blog.findById(id)
         res.json(singleBlog)
     } catch (error) {
         errorHandler(error, res)

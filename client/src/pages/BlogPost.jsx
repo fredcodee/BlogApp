@@ -14,7 +14,7 @@ import { faPenToSquare, faTrashCan, faMapPin } from '@fortawesome/free-solid-svg
 
 
 const BlogPost = () => {
-  const { title} = useParams()
+  const { id} = useParams()
   let [blog, setBlog] = useState({})
   let { user } = useContext(AuthContext)
   const [showDeletePopup, setShowDeletePopup] = useState(false);
@@ -23,14 +23,14 @@ const BlogPost = () => {
 
   useEffect(() => {
     getBlog(),
-      randomBlogs()
+    randomBlogs()
   }, [])
 
   const getBlog = async () => {
     //change to axios
     let config = {
       method: 'get',
-      url: `/api/single-blog/${title}`,
+      url: `/api/single-blog/${id}`,
     };
     await axios.request(config)
       .then((response) => {
@@ -59,7 +59,7 @@ const BlogPost = () => {
   const handleDelete = async () => {
     const token = localStorage.getItem('authTokens').replace(/"/g, '');
     const body = {
-      id: id,
+      id: blog._id,
     }
     const response = await axios.post('/api/admin/delete-blog', body, {
       headers: {
@@ -80,7 +80,7 @@ const BlogPost = () => {
   const pinBlog = async () => {
     const token = localStorage.getItem('authTokens').replace(/"/g, '');
     const body = {
-      id: id,
+      id: blog._id,
     }
 
     const response = await axios.post('/api/admin/pin-blog', body, {
@@ -129,7 +129,7 @@ const BlogPost = () => {
           {user ? (
 
             <div className='flex justify-center space-x-4 pb-3'>
-              <Link to={`/edit/${blog.title}`} className='p-2'>
+              <Link to={`/edit/${blog._id}`} className='p-2'>
                 <FontAwesomeIcon icon={faPenToSquare} size="2x" color="#1DA1F2" />
               </Link>
               {blog.pin ? (

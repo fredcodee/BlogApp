@@ -26,7 +26,7 @@ function App() {
         <Routes>
             <Route element = {<Home />}  path = "/"/>
             <Route element = {<Blog />} path = "/blog" />
-            <Route element = {<BlogPost />} path = "/blog/:title" />
+            <Route element = {<BlogPost />} path = "/blog/:id" />
             <Route element = {<Contact />} path = "/contact" />
 
             {/* admin/editor */}

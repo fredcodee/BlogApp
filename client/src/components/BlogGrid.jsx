@@ -53,7 +53,7 @@ const BlogGrid = () => {
             <div className='grid grid-cols-1 md:grid-cols-3 container p-6 gap-5'>
                 {blogs.map((blog, index) => {
                     return (
-                        <Link key={index} to={`/blog/${blog.title}`} className='no-underline text-black'>
+                        <Link key={index} to={`/blog/${blog._id}`} className='no-underline text-black'>
                             <div className='grid1-item'>
                                 <div>
                                     {/* if blog.image is not null, use blog.image, else use example */}
