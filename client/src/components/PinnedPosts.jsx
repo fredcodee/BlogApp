@@ -7,7 +7,7 @@ const PinnedPosts = ({randomPins}) => {
         <div className='grid grid-cols-1 md:grid-cols-3 p-6 gap-5'>
             {randomPins.map((pin, index) =>{
                 return(
-                    <Link to={`/blog/${pin._id}`} className='no-underline text-black' key={index}>
+                    <Link key={index} to={`/blog/${pin.title}`} className='no-underline text-black'>
                         <div className="grid1-item hover:text-darkOrange">
                             <div>
                                 <img src={pin.image ? `/uploads/${pin.image}`: example} className='w-full m-h-[200px] h-full rounded-xl' />

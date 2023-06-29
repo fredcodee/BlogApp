@@ -5,8 +5,8 @@ import 'react-quill/dist/quill.snow.css';
 import axios from 'axios';
 
 const EditBlog = () => {
-    const { id } = useParams()
-    const [title, setTitle] = useState('');
+    const { title } = useParams()
+    const [blogtitle, setBlogtitle] = useState('');
     const [value, setValue] = useState('');
     const [selectedFile, setSelectedFile] = useState(null);
     const [errors, setErrors] = useState('');
@@ -37,9 +37,9 @@ const EditBlog = () => {
 
     const fetchBlogData = async () => {
         try {
-            const response = await axios.get(`/api/single-blog/${id}`);
+            const response = await axios.get(`/api/single-blog/${title}`);
             const blogData = response.data;
-            setTitle(blogData.title);
+            setBlogtitle(blogData.title);
             setValue(blogData.description);
         } catch (error) {
             setErrors('Error fetching blog data.');
@@ -47,7 +47,7 @@ const EditBlog = () => {
     };
 
     const handleTitleChange = (event) => {
-        setTitle(event.target.value);
+        setBlogtitle(event.target.value);
     };
 
     const handleFileChange = (event) => {
@@ -71,7 +71,7 @@ const EditBlog = () => {
             }
 
             // Validate if a title is entered
-            if (!title) {
+            if (!blogtitle) {
                 setErrors('Please enter a title for your blog.');
                 return;
             }
@@ -79,7 +79,7 @@ const EditBlog = () => {
             // send content to server if success then send image to server
             const blogData = {
                 id: id,
-                title: title,
+                title: blogtitle,
                 description: value,
             };
             const token = localStorage.getItem('authTokens').replace(/"/g, '');

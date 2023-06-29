@@ -27,7 +27,7 @@ const Bloglists = ({ posts }) => {
                                         {posts.map((post, index) => (
                                             <tr key={index}>
                                                 <td className="p-2 whitespace-nowrap">
-                                                <Link to={`/blog/${post._id}`} className='no-underline'>
+                                                <Link to={`/blog/${post.title}`} className='no-underline'>
                                                     <div className="flex items-center">
                                                         <div className="font-medium text-gray-800">{post.title}</div>
                                                     </div>

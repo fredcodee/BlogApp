@@ -14,7 +14,7 @@ import { faPenToSquare, faTrashCan, faMapPin } from '@fortawesome/free-solid-svg
 
 
 const BlogPost = () => {
-  const { id } = useParams()
+  const { title} = useParams()
   let [blog, setBlog] = useState({})
   let { user } = useContext(AuthContext)
   const [showDeletePopup, setShowDeletePopup] = useState(false);
@@ -30,7 +30,7 @@ const BlogPost = () => {
     //change to axios
     let config = {
       method: 'get',
-      url: `/api/single-blog/${id}`,
+      url: `/api/single-blog/${title}`,
     };
     await axios.request(config)
       .then((response) => {
@@ -129,7 +129,7 @@ const BlogPost = () => {
           {user ? (
 
             <div className='flex justify-center space-x-4 pb-3'>
-              <Link to={`/edit/${id}`} className='p-2'>
+              <Link to={`/edit/${blog.title}`} className='p-2'>
                 <FontAwesomeIcon icon={faPenToSquare} size="2x" color="#1DA1F2" />
               </Link>
               {blog.pin ? (

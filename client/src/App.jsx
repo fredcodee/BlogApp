@@ -26,7 +26,7 @@ function App() {
         <Routes>
             <Route element = {<Home />}  path = "/"/>
             <Route element = {<Blog />} path = "/blog" />
-            <Route element = {<BlogPost />} path = "/blog/:id" />
+            <Route element = {<BlogPost />} path = "/blog/:title" />
             <Route element = {<Contact />} path = "/contact" />
 
             {/* admin/editor */}
@@ -35,7 +35,7 @@ function App() {
             <Route element = {<Logout />} path  = "/logout"/>
             <Route element = {<PrivateRoute> <Admin /></PrivateRoute>} path = "/admin-dashboard" /> 
             <Route element = {<PrivateRoute> <Write /></PrivateRoute>} path = "/write" />
-            <Route element = {<PrivateRoute> <Edit /></PrivateRoute>} path = "/edit/:id" />
+            <Route element = {<PrivateRoute> <Edit /></PrivateRoute>} path = "/edit/:title" />
             <Route element = {<PrivateRoute> <Users /></PrivateRoute>} path = "/users" />
 
         </Routes>
