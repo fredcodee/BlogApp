@@ -154,7 +154,7 @@ const BlogPost = () => {
       </div>
 
       <div className='min-h-[300px] lg:min-h-[400px]'>
-        <img src={blog.image ? `/uploads/${blog.image}` : example} className='w-full h-full object-cover rounded-xl' />
+        <img src={blog.image ? blog.image : example} className='w-full h-full object-cover rounded-xl' />
       </div>
       <div className='mt-4 mb-5' dangerouslySetInnerHTML={{ __html: blog.description }}></div>
 

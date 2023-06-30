@@ -10,7 +10,7 @@ const PinnedPosts = ({randomPins}) => {
                     <a key={index} href={`/blog/${pin._id}`} className='no-underline text-black'>
                         <div className="grid1-item hover:text-darkOrange">
                             <div>
-                                <img src={pin.image ? `/uploads/${pin.image}`: example} className='w-full m-h-[200px] h-full rounded-xl' />
+                                <img src={pin.image ? pin.image: example} className='w-full m-h-[200px] h-full rounded-xl' />
                             </div>
                             <div className='p-2'>
                                 <p style={{ marginBottom: "0" }}>{new Date(pin.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
