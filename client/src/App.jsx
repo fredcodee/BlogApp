@@ -17,13 +17,8 @@ import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import { AuthProvider } from './context/AuthContext';
 import PrivateRoute from './utlis/PrivateRoute';
-import disableReactDevTools from '@fvilers/disable-react-devtools';
 
 
-if (process.env.NODE_ENV === 'production') {
-  disableReactDevTools();
-}
- 
 function App() {
   return (
       <BrowserRouter>
