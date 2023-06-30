@@ -130,10 +130,8 @@ const addBlogImage = async (req, res) => {
         if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
             return res.status(400).send('Please upload a image file')
         }
-
-        const result = await cloudinary.uploader.upload(file.path)
         // save image
-        const newImage = new image({ name: file.filename, url: result.secure_url })
+        const newImage = new image({ name: file.filename, url: file.path });
         const savedImage = await newImage.save()
         const blogpost = await blog.findById(id)
         if (blogpost) {
@@ -153,20 +151,18 @@ const addBlogImage = async (req, res) => {
 //add content images
 const addContentImage = async (req, res) => {
     try {
-        const file = req.file;
-        //error handling if file is not jpg, jpeg or png
-        if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
-            return res.status(400).send('Please upload a image file')
-        }
-        const result = await cloudinary.uploader.upload(file.path)
-        const newImage = new image({ name: file.filename, url: result.secure_url})
-        const savedImage = await newImage.save()
-        return res.json(savedImage.url)
+      const file = req.file;
+      // Error handling if file is not jpg, jpeg, or png
+      if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+        return res.status(400).send('Please upload an image file');
+      }
+      const newImage = new image({ name: file.filename, url: file.path });
+      const savedImage = await newImage.save();
+      return res.json(savedImage.url);
+    } catch (error) {
+      errorHandler(error, res);
     }
-    catch (error) {
-        errorHandler(error, res)
-    }
-}
+  }
 
 
 //delete blogpost
