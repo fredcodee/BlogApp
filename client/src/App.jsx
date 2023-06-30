@@ -31,7 +31,7 @@ function App() {
             <Route element = {<Contact />} path = "/contact" />
 
             {/* admin/editor */}
-            <Route element = {<Login />} path = "/admin/login/190023" />
+            <Route element = {<Login />} path = "/admin/login/:passcode" />
             <Route element = {<Register/>} path = "/admin/register/:passcode" />
             <Route element = {<Logout />} path  = "/logout"/>
             <Route element = {<PrivateRoute> <Admin /></PrivateRoute>} path = "/admin-dashboard" /> 
