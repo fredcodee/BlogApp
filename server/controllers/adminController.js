@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs')
 const user = require('../models/userModel')
 const blog = require('../models/blogModel')
 const image = require('../models/image')
+const cloudinary = require('cloudinary').v2;
 const fs = require('fs')
 
 
@@ -130,9 +131,13 @@ const addBlogImage = async (req, res) => {
             return res.status(400).send('Please upload a image file')
         }
 
+        const result = await cloudinary.uploader.upload(file.path)
+        // save image
+        const newImage = new image({ name: file.filename, url: result.secure_url })
+        const savedImage = await newImage.save()
         const blogpost = await blog.findById(id)
         if (blogpost) {
-            blogpost.image = file.filename
+            blogpost.image =  savedImage.url
             const savedBlog = await blogpost.save()
             return res.json(savedBlog)
         } else {
@@ -153,10 +158,10 @@ const addContentImage = async (req, res) => {
         if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
             return res.status(400).send('Please upload a image file')
         }
-
-        const newImage = new image({ name: file.filename })
+        const result = await cloudinary.uploader.upload(file.path)
+        const newImage = new image({ name: file.filename, url: result.secure_url})
         const savedImage = await newImage.save()
-        return res.json(`/uploads/${savedImage.name}`)
+        return res.json(savedImage.url)
     }
     catch (error) {
         errorHandler(error, res)
@@ -164,21 +169,10 @@ const addContentImage = async (req, res) => {
 }
 
 
-
 //delete blogpost
 const deleteBlog = async (req, res) => {
     const { id } = req.body;
     try {
-        //find blog by id and delete the image from uploads folder
-        const blogpost = await blog.findById(id)
-        const image = blogpost.image
-        fs.unlink(`../client/public/uploads/${image}`, (err) => {
-            if (err) {
-                console.error(err)
-                return
-            }
-        })
-        //delete blogpost from database
         const deletedBlog = await blog.findByIdAndDelete(id)
         return res.json({ message: 'Blog deleted successfully' })
     } catch (error) {
@@ -273,5 +267,7 @@ function errorHandler(error, res) {
 
 
 module.exports = {
-    health, registerUser, loginUser, getMe, getBlogs, addBlog, filterBlogs, deleteBlog, updateBlog, pinBlog, checkPasscode, addBlogImage, getUsers, deleteUser, addContentImage
+    health, registerUser, loginUser, getMe, getBlogs, addBlog, filterBlogs, 
+    deleteBlog, updateBlog, pinBlog, checkPasscode, addBlogImage, getUsers, 
+    deleteUser, addContentImage
 }
