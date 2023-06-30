@@ -3,8 +3,8 @@ import { BrowserRouter, Route, Routes} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import Home from './pages/Home';
-import Register from './pages/Register';
 import Login from './pages/Login';
+import Register from './pages/Register';
 import Logout from './pages/Logout';
 import Blog from './pages/Blog';
 import Admin from './pages/Admin';
@@ -31,7 +31,7 @@ function App() {
             <Route element = {<Contact />} path = "/contact" />
 
             {/* admin/editor */}
-            <Route element = {<Login />} path = "/admin/login/:passcode" />
+            <Route element = {<Login />} path = "/admin/login/190023" />
             <Route element = {<Register/>} path = "/admin/register/:passcode" />
             <Route element = {<Logout />} path  = "/logout"/>
             <Route element = {<PrivateRoute> <Admin /></PrivateRoute>} path = "/admin-dashboard" /> 
