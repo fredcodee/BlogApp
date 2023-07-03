@@ -3,7 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require('cors');
-const corsOptions = require('./configs/corsOptions');
+const allowedOrigins = require('./configs/allowedOrigins');
 const  appRoutes = require("./routes/appRoutes")
 const adminRoutes = require("./routes/admin")
 
@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(express.json());
-app.use(cors(corsOptions));
+app.use(cors({  origin: allowedOrigins, credentials: true }));
 app.use('/api', appRoutes);
 app.use('/api/admin', adminRoutes);
 

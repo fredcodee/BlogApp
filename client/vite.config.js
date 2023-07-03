@@ -7,7 +7,8 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://thefredcode-api.onrender.com',
+        // target: 'https://thefredcode-api.onrender.com',
+        target: 'http://localhost:1900',
         changeOrigin: true,
         rewrite: (path) => path,
       },
