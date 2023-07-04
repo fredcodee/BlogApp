@@ -1,6 +1,5 @@
 import React from 'react'
 import example from '../assets/images/example.jpg'
-import { Link } from 'react-router-dom'
 
 const PinnedPosts = ({randomPins}) => {
     return (

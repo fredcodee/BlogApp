@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 import jwt_decode from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
+import api from '../api';
 
 const AuthContext = createContext();
 
@@ -22,46 +23,46 @@ export const AuthProvider = ({ children }) => {
   const history = useNavigate();
 
   const loginUser = async (email, password) => {
-    const response = await fetch('/api/admin/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
+    try {
+      const response = await api.post('/api/admin/login', {
         email,
         password,
-      }),
-    });
+      });
 
-    const data = await response.json();
-    if (response.status === 200) {
-      setAuthTokens(data.token);
-      setUser(jwt_decode(data.token));
-      localStorage.setItem('authTokens', JSON.stringify(data.token));
-      history('/admin-dashboard');
-    } else {
-      setError(data.message);
+      const data = await response.data;
+      if (response.status === 200) {
+        setAuthTokens(data.token);
+        setUser(jwt_decode(data.token));
+        localStorage.setItem('authTokens', JSON.stringify(data.token));
+        history('/admin-dashboard');
+      } else {
+        setError(data.message);
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
+
+
 
   const registerUser = async (email, password) => {
-    const response = await fetch('/api/admin/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
+    try {
+      const response = await api.post('/api/admin/register', {
         email,
         password,
-      }),
-    });
-    if (response.status === 201) {
-      history('/admin/login/190023');
-    } else {
-      const data = await response.json();
-      setError(data.message);
+      });
+
+      if (response.status === 201) {
+        history('/admin/login/190023');
+      } else {
+        const data = await response.data;
+        setError(data.message);
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
+
 
   const logoutUser = () => {
     setAuthTokens(null);

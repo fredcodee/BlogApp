@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTwitter, faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import Footer from '../components/Footer'
-import axios from 'axios'
+import api from '../api';
 
 const Contact = () => {
     const [name, setName] = useState("");
@@ -16,32 +16,22 @@ const Contact = () => {
 
     let handleSubmit = async (e) => {
         e.preventDefault();
-        let config = {
-            method: 'post',
-            url: '/api/send-email',
-            headers:{
-                'Content-Type':'application/json'
-            },
-            data: {
-                name: name,
-                email: email,
-                message: message
-            }
-        };
-
-        await axios.request(config)
-            .then((response) => {
-                setError(false)
-                setSuccess(true)
-                e.target.reset()
-            })
-            .catch((error) => {  
-                setError(true)
-            });
-    };
-
-
-
+      
+        try {
+          const response = await api.post('/api/send-email', {
+            name: name,
+            email: email,
+            message: message
+          });
+      
+          setError(false);
+          setSuccess(true);
+          e.target.reset();
+        } catch (error) {
+          setError(true);
+          console.error(error);
+        }
+      };
 
   return (
     <div>

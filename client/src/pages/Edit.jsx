@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import axios from 'axios';
+import api from '../api';
 
 const EditBlog = () => {
     const { id } = useParams()
@@ -37,7 +37,7 @@ const EditBlog = () => {
 
     const fetchBlogData = async () => {
         try {
-            const response = await axios.get(`/api/single-blog/${id}`);
+            const response = await api.get(`/api/single-blog/${id}`);
             const blogData = response.data;
             setBlogtitle(blogData.title);
             setValue(blogData.description);
@@ -83,7 +83,7 @@ const EditBlog = () => {
                 description: value,
             };
             const token = localStorage.getItem('authTokens').replace(/"/g, '');
-            const response = await axios.post(`/api/admin/edit-blog`, blogData, {
+            const response = await api.post(`/api/admin/edit-blog`, blogData, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -94,7 +94,7 @@ const EditBlog = () => {
                     formData.append('image', selectedFile);
                     formData.append('id', id);
                     try {
-                        const imageResponse = await axios.post('/api/admin/upload', formData, {
+                        const imageResponse = await api.post('/api/admin/upload', formData, {
                             headers: {
                                 'Content-Type': 'multipart/form-data',
                             },

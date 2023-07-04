@@ -1,6 +1,7 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
 import Bloglists from '../components/Bloglists'
+import api from '../api'
 
 
 const Admin = () => {
@@ -12,25 +13,25 @@ const Admin = () => {
   useEffect(() => {
       getPosts();
   }, []);
-
+  
   let getPosts = async () => {
     try {
       const token = localStorage.getItem('authTokens').replace(/"/g, '');
-
-      const response = await fetch('/api/admin/all-blogs', {
-        method: 'GET',
+  
+      const response = await api.get('/api/admin/all-blogs', {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         }
       });
-      const data = await response.json();
+  
+      const data = await response.data;
       setPosts(data);
       setPostscopy(data);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
-  }
+  };
 
   const handleSearch = async (e) => {
     try {

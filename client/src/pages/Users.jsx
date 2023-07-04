@@ -1,5 +1,5 @@
 import React from 'react'
-import axios from 'axios'
+import api from '../api'
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
@@ -14,7 +14,7 @@ const Users = () => {
 
     const getUsers = async () => {
         const token = localStorage.getItem('authTokens').replace(/"/g, '');
-        const response = await axios.get('/api/admin/get-users', {
+        const response = await api.get('/api/admin/get-users', {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
@@ -33,7 +33,7 @@ const Users = () => {
             id: id,
         }
 
-        const response = await axios.post('/api/admin/delete-user', body, {
+        const response = await api.post('/api/admin/delete-user', body, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },

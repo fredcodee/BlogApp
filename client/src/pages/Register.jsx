@@ -1,6 +1,6 @@
 import React from 'react'
 import {useEffect, useContext, useState } from 'react'
-import axios from 'axios'
+import api from '../api';
 import { useParams, useNavigate} from 'react-router-dom';
 import AuthContext from '../context/AuthContext';
 import "../assets/css/signup.css"
@@ -19,26 +19,17 @@ const Register = () => {
   }, [])
 
   let checkPasscode = async () => {
-    let config = {
-      method: 'post',
-      url: '/api/admin/check-passcode',
-      headers:{
-        'Content-Type':'application/json'
-      },
-      data: {
-        passcode: passcode
-          
-      }
-    };
-
-    await axios.request(config)
-      .then((response) => {
-        console.log(response.data)
-      })
-      .catch((error) => {
-        history('/');
+    try {
+      const response = await api.post('/api/admin/check-passcode', {
+        passcode: passcode,
       });
-  }
+  
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+      history('/');
+    }
+  };
 
   const handleSubmit = async e => {
     e.preventDefault();

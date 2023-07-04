@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import axios from 'axios';
+import api from '../api';
 import '../assets/css/editor.css';
 
 const Write = () => {
@@ -69,7 +69,7 @@ const Write = () => {
       const formData = new FormData();
       formData.append('image', file);
       try {
-        const response = await axios.post('/api/admin/upload-images', formData, {
+        const response = await api.post('/api/admin/upload-images', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
@@ -117,7 +117,7 @@ const Write = () => {
         description: value,
       }
       const token = localStorage.getItem('authTokens').replace(/"/g, '');
-      const response = await axios.post('/api/admin/add-blog', blogData, {
+      const response = await api.post('/api/admin/add-blog', blogData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -128,7 +128,7 @@ const Write = () => {
           formData.append('image', selectedFile);
           formData.append('id', response.data._id);
           try {
-            const imageResponse = await axios.post('/api/admin/upload', formData, {
+            const imageResponse = await api.post('/api/admin/upload', formData, {
               headers: {
                 'Content-Type': 'multipart/form-data',
               },

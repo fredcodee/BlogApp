@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
-import axios from 'axios'
+import api from '../api'
 import AuthContext from '../context/AuthContext'
 import PinnedPosts from '../components/PinnedPosts'
 import example from '../assets/images/example.jpg'
@@ -14,7 +14,7 @@ import { faPenToSquare, faTrashCan, faMapPin } from '@fortawesome/free-solid-svg
 
 
 const BlogPost = () => {
-  const { id} = useParams()
+  const { id } = useParams()
   let [blog, setBlog] = useState({})
   let { user } = useContext(AuthContext)
   const [showDeletePopup, setShowDeletePopup] = useState(false);
@@ -23,84 +23,66 @@ const BlogPost = () => {
 
   useEffect(() => {
     getBlog(),
-    randomBlogs()
+      randomBlogs()
   }, [])
 
   const getBlog = async () => {
-    //change to axios
-    let config = {
-      method: 'get',
-      url: `/api/single-blog/${id}`,
-    };
-    await axios.request(config)
-      .then((response) => {
-        setBlog(response.data)
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
+    try {
+      const response = await api.get(`/api/single-blog/${id}`);
+      setBlog(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const randomBlogs = async () => {
-    let config = {
-      method: 'get',
-      url: '/api/random-pinned-blogs',
-    };
-    await axios.request(config)
-      .then((response) => {
-        setPicks(response.data)
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-
+    try {
+      const response = await api.get('/api/random-pinned-blogs');
+      setPicks(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const handleDelete = async () => {
-    const token = localStorage.getItem('authTokens').replace(/"/g, '');
-    const body = {
-      id: blog._id,
+    try {
+      const token = localStorage.getItem('authTokens').replace(/"/g, '');
+      const body = {
+        id: blog._id,
+      };
+      const response = await api.post('/api/admin/delete-blog', body, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      history('/admin-dashboard');
+    } catch (error) {
+      console.error(error);
+      setShowDeletePopup(false);
     }
-    const response = await axios.post('/api/admin/delete-blog', body, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((response) => {
-        history('/admin-dashboard')
-      }
-      )
-      .catch((error) => {
-        console.log(error);
-        setShowDeletePopup(false)
-      }
-      );
-  }
+  };
 
   const pinBlog = async () => {
-    const token = localStorage.getItem('authTokens').replace(/"/g, '');
-    const body = {
-      id: blog._id,
+    try {
+      const token = localStorage.getItem('authTokens').replace(/"/g, '');
+      const body = {
+        id: blog._id,
+      };
+
+      const response = await api.post('/api/admin/pin-blog', body, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      window.location.reload();
+    } catch (error) {
+      console.error(error);
     }
+  };
 
-    const response = await axios.post('/api/admin/pin-blog', body, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((response) => {
-        window.location.reload();
-      }
-      )
-      .catch((error) => {
-        console.log(error);
-      }
-      );
-  }
-
-  const handleShare = async(social) => {
-    const url = window.location.href; 
-    const title = blog.title; 
+  const handleShare = async (social) => {
+    const url = window.location.href;
+    const title = blog.title;
 
     // Create the sharing URLs for each social media platform
     const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
@@ -179,7 +161,7 @@ const BlogPost = () => {
         <div className='pt-3'>
           <h2 className='text-2xl font-bold'>ARTICLES YOU MAY LIKE</h2>
         </div>
-        <PinnedPosts  randomPins={picks}/>
+        <PinnedPosts randomPins={picks} />
         <hr />
       </div>
       {showDeletePopup && (

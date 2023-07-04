@@ -2,7 +2,7 @@ import React from 'react'
 import example from '../assets/images/example.jpg'
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
-import axios from 'axios'
+import api from '../api'
 
 const BlogGrid = () => {
     let [blogs, setBlogs] = useState([])
@@ -17,7 +17,7 @@ const BlogGrid = () => {
 
     const getBlogs = async (page) => {
         try {
-            const response = await axios.post('/api/all-blogs', { page });
+            const response = await api.post('/api/all-blogs', { page });
             setBlogs(response.data.blogs);
             setTotalPages(response.data.totalPages);
         } catch (error) {
