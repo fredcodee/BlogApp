@@ -8,6 +8,7 @@ const EditBlog = () => {
     const { id } = useParams()
     const [blogtitle, setBlogtitle] = useState('');
     const [value, setValue] = useState('');
+    const [date, setDate] = useState('');
     const [selectedFile, setSelectedFile] = useState(null);
     const [errors, setErrors] = useState('');
     const [success, setSuccess] = useState('');
@@ -41,6 +42,7 @@ const EditBlog = () => {
             const blogData = response.data;
             setBlogtitle(blogData.title);
             setValue(blogData.description);
+            setDate(blogData.date);
         } catch (error) {
             setErrors('Error fetching blog data.');
         }
@@ -49,6 +51,11 @@ const EditBlog = () => {
     const handleTitleChange = (event) => {
         setBlogtitle(event.target.value);
     };
+
+    const handleDateChange = (event) => {
+        setDate(event.target.value);
+    };
+
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
@@ -81,6 +88,7 @@ const EditBlog = () => {
                 id: id,
                 title: blogtitle,
                 description: value,
+                date: date,
             };
             const token = localStorage.getItem('authTokens').replace(/"/g, '');
             const response = await api.post(`/api/admin/edit-blog`, blogData, {
@@ -120,8 +128,13 @@ const EditBlog = () => {
                 <h2>Edit Blog post</h2>
             </div>
             <div>
-                <input type="text" placeholder='Title of The Blog' value={title} onChange={handleTitleChange} />
+                <input type="text" placeholder='Title of The Blog' value={blogtitle} onChange={handleTitleChange} />
                 <hr />
+                <div>
+                    <label htmlFor="">Date</label>
+                    <p style={{ marginBottom: '0' }}>{new Date(date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
+                    <input type="date" onChange={handleDateChange} />
+                </div>
                 <div>
                     <label htmlFor="">Blog Image</label>
                     <input type="file" onChange={handleFileChange} style={{ margin: "0" }} />

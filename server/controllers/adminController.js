@@ -179,7 +179,7 @@ const deleteBlog = async (req, res) => {
 
 //update blogpost
 const updateBlog = async (req, res) => {
-    const { id, title, description } = req.body;
+    const { id, title, description, date } = req.body;
     try {
         //find blog by id
         const document = await blog.findById(id)
@@ -187,6 +187,7 @@ const updateBlog = async (req, res) => {
             $set: {
                 title: title,
                 description: description,
+                date: date
             }
         });
         return res.json({ message: 'Blog updated successfully' })

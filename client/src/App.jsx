@@ -36,7 +36,7 @@ function App() {
             <Route element = {<Logout />} path  = "/logout"/>
             <Route element = {<PrivateRoute> <Admin /></PrivateRoute>} path = "/admin-dashboard" /> 
             <Route element = {<PrivateRoute> <Write /></PrivateRoute>} path = "/write" />
-            <Route element = {<PrivateRoute> <Edit /></PrivateRoute>} path = "/edit/:title" />
+            <Route element = {<PrivateRoute> <Edit /></PrivateRoute>} path = "/edit/:id" />
             <Route element = {<PrivateRoute> <Users /></PrivateRoute>} path = "/users" />
 
         </Routes>
