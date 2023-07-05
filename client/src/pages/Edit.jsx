@@ -14,23 +14,32 @@ const EditBlog = () => {
     const [success, setSuccess] = useState('');
 
     const modules = {
-        toolbar: [
+        toolbar: {
+          container: [
             [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
             ['bold', 'italic', 'underline', 'strike'],
             [{ 'color': [] }, { 'background': [] }],
             [{ 'link': 'link' }],
+            [{ 'image': 'image' }],
             [{ 'align': [] }],
+            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
             ['clean'],
-        ],
-    };
-
-    const formats = [
+            ['code-block'],
+          ]
+        }
+    
+      };
+    
+      const formats = [
         'header',
         'bold', 'italic', 'underline', 'strike',
         'color', 'background',
         'link',
+        'image',
         'align',
-    ];
+        'list', 'bullet',
+        'code-block'
+      ];
 
     useEffect(() => {
         fetchBlogData();

@@ -8,7 +8,6 @@ if (import.meta.env.VITE_MODE === "Production") {
   baseURL = import.meta.env.VITE_API_BASE_URL_DEV;
 }
 
-
 const api = axios.create({
   baseURL: baseURL,
 });
