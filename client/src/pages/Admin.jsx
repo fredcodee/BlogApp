@@ -2,9 +2,11 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import Bloglists from '../components/Bloglists'
 import api from '../api'
+import "../assets/css/loader.css"
 
 
 const Admin = () => {
+  const [loading, setLoading] = useState(false);
   const [posts, setPosts] = useState([])
   const [search, setSearch] = useState('')
   const [postscopy, setPostscopy] = useState([])
@@ -16,6 +18,7 @@ const Admin = () => {
   
   let getPosts = async () => {
     try {
+      setLoading(true); // Set loading before sending API request
       const token = localStorage.getItem('authTokens').replace(/"/g, '');
   
       const response = await api.get('/api/admin/all-blogs', {
@@ -28,7 +31,9 @@ const Admin = () => {
       const data = await response.data;
       setPosts(data);
       setPostscopy(data);
+      setLoading(false); // Stop loading
     } catch (error) {
+      setLoading(false); // Stop loading in case of error
       console.error(error);
     }
   };
@@ -75,6 +80,15 @@ const Admin = () => {
           <h2 className='text-lg'>Blogs Posted</h2>
           <hr />
         </div>
+        {loading ?
+          <div class="load-wrapp">
+            <div class="load-3">
+              <p>Loading...</p>
+              <div class="line"></div>
+              <div class="line"></div>
+              <div class="line"></div>
+            </div>
+          </div> : null}
         <Bloglists posts={posts} />
       </div>
 

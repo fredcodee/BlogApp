@@ -3,8 +3,10 @@ import example from '../assets/images/example.jpg'
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import api from '../api'
+import "../assets/css/loader.css"
 
 const BlogGrid = () => {
+    const [loading, setLoading] = useState(false);
     let [blogs, setBlogs] = useState([])
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
@@ -17,10 +19,13 @@ const BlogGrid = () => {
 
     const getBlogs = async (page) => {
         try {
+            setLoading(true); // Set loading before sending API request
             const response = await api.post('/api/all-blogs', { page });
             setBlogs(response.data.blogs);
             setTotalPages(response.data.totalPages);
+            setLoading(false); // Stop loading
         } catch (error) {
+            setLoading(false); // Stop loading in case of error
             console.log(error);
         }
     };
@@ -50,6 +55,15 @@ const BlogGrid = () => {
 
     return (
         <div>
+            {loading ?
+                <div class="load-wrapp">
+                    <div class="load-3">
+                        <p>Loading...</p>
+                        <div class="line"></div>
+                        <div class="line"></div>
+                        <div class="line"></div>
+                    </div>
+                </div> : null}
             <div className='grid grid-cols-1 md:grid-cols-3 container p-6 gap-5'>
                 {blogs.map((blog, index) => {
                     return (

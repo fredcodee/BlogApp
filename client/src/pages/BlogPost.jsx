@@ -8,12 +8,14 @@ import example from '../assets/images/example.jpg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTwitter, faLinkedin, faFacebook } from '@fortawesome/free-brands-svg-icons';
 import { faPenToSquare, faTrashCan, faMapPin } from '@fortawesome/free-solid-svg-icons';
+import "../assets/css/loader.css"
 
 
 
 
 
 const BlogPost = () => {
+  const [loading, setLoading] = useState(false);
   const { id } = useParams()
   let [blog, setBlog] = useState({})
   let { user } = useContext(AuthContext)
@@ -28,9 +30,12 @@ const BlogPost = () => {
 
   const getBlog = async () => {
     try {
+      setLoading(true);
       const response = await api.get(`/api/single-blog/${id}`);
       setBlog(response.data);
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
       console.error(error);
     }
   };
@@ -106,6 +111,15 @@ const BlogPost = () => {
 
   return (
     <div className='container'>
+      {loading ?
+          <div class="load-wrapp">
+            <div class="load-3">
+              <p>Loading...</p>
+              <div class="line"></div>
+              <div class="line"></div>
+              <div class="line"></div>
+            </div>
+          </div> : null}
       <div>
         <div className='text-center p-3'>
           {user ? (

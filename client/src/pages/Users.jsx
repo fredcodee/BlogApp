@@ -2,8 +2,10 @@ import React from 'react'
 import api from '../api'
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import "../assets/css/loader.css"
 
 const Users = () => {
+    const [loading, setLoading] = useState(false);
     const [users, setUsers] = useState([])
     const [error, setError] = useState('')
 
@@ -13,6 +15,7 @@ const Users = () => {
 
 
     const getUsers = async () => {
+        setLoading(true);
         const token = localStorage.getItem('authTokens').replace(/"/g, '');
         const response = await api.get('/api/admin/get-users', {
             headers: {
@@ -21,6 +24,7 @@ const Users = () => {
         })
             .then((response) => {
                 setUsers(response.data)
+                setLoading(false);
             })
             .catch((error) => {
                 console.log(error);
@@ -53,6 +57,15 @@ const Users = () => {
             <div>
                 <h2 className='font-bold p-3'>Current Users 👥</h2>
             </div>
+            {loading ?
+                <div class="load-wrapp">
+                    <div class="load-3">
+                        <p>Sending...</p>
+                        <div class="line"></div>
+                        <div class="line"></div>
+                        <div class="line"></div>
+                    </div>
+                </div> : null}
             <section className="antialiased bg-gray-100h-screen px-4">
                 <div className="flex flex-col justify-center h-full">
                     <div className="w-full mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
