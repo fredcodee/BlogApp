@@ -5,15 +5,13 @@ html {
 	font-family: 'Montserrat', sans-serif;
 }
 
-body {
-}
 
 a {
-	display:block;
+	/* display:block; */
 	text-decoration:none;
-	color:#A2A5A6;
+	/* color:#A2A5A6;
 	text-align:center;
-	padding:20px 0 0;
+	padding:20px 0 0; */
 }
 
 form {
