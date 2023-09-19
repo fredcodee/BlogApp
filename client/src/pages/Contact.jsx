@@ -39,7 +39,7 @@ const Contact = () => {
     };
 
     return (
-        <div>
+        <div className='pb-5'>
             <div className='container w-full grid gap-4 gap-y-8 md:grid-cols-2'>
                 <div className="grid1-item">
                     <h2 role="text" className="text-5xl md:text-6xl font-medium text-slate-800">
@@ -103,8 +103,7 @@ const Contact = () => {
                     </div> : null}
 
             </div>
-            <hr className='container mb-20' />
-            <Footer />
+            <hr className='container mb-20 pb-5' />
         </div>
     )
 }
