@@ -5,6 +5,8 @@ import {faCircleCheck, faEnvelope} from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faLinkedin} from '@fortawesome/free-brands-svg-icons';
 import aboutMeImg from '../assets/images/aboutme.jpg'
 import project1 from '../assets/images/project1.jpg'
+import project2 from '../assets/images/project2.jpg'
+import project3 from '../assets/images/example.jpg'
 
 const Home = () => {
 
@@ -151,26 +153,25 @@ const Home = () => {
             <div className="...">
               <div className='border-solid border-2 border-gray-500 rounded-lg p-4' style={{height:'30rem'}}>
                 <div>
-                  <img src={project1} alt="project image" />
+                  <img src={project2} alt="project image" />
                 </div>
                 <div>
-                  <p className='font-bold pt-4 text-2xl'>TeamManagament</p>
-                  <p className='pb-5'>Lorem ipsum dolor sit amet consectetur adipisicing elit, eius eum ut obcaecati id neque nostrum adipisci, quos facere, illo doloribus commodi voluptate vero! Dolores, alias!</p>
-                  <a href='#'  className="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-400 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Live Demo</a>
-                  <a href='#'  className="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-400 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Github</a>
+                  <p className='font-bold pt-4 text-2xl'>Shoplite</p>
+                  <p className='pb-5'>e-commerce platform that helps creators sell digital products directly to their audience</p>
+                  <a href='https://shoplite.netlify.app/'  className="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-400 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Live Demo</a>
+                  <a href='https://github.com/fredcodee/Shoplite'  className="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-400 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Github</a>
                 </div>
               </div>
             </div>
             <div className="...">
-              <div className='border-solid border-2 border-gray-500 rounded-lg p-4' style={{height:'30rem'}}>
+              <div className='border-solid border-2 border-gray-500 rounded-lg p-4' style={{height:'36rem'}}>
                 <div>
-                  <img src={project1} alt="project image" />
+                  <img src={project3} alt="project image" />
                 </div>
                 <div>
-                  <p className='font-bold pt-4 text-2xl'>TeamManagament</p>
-                  <p className='pb-5'>Lorem ipsum dolor sit amet consectetur adipisicing elit, eius eum ut obcaecati id neque nostrum adipisci, quos facere, illo doloribus commodi voluptate vero! Dolores, alias!</p>
-                  <a href='#'  className="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-400 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Live Demo</a>
-                  <a href='#'  className="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-400 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Github</a>
+                  <p className='font-bold pt-4 text-2xl'>mellow</p>
+                  <p className='pb-5'>Project management tool and a workflow management app for companies/agencies to start managing their projects while collaborating with their project managers and developers effectively</p>
+                  <a href='https://github.com/fredcodee/mello'  className="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-400 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Github</a>
                 </div>
               </div>
             </div>
