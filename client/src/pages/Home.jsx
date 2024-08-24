@@ -57,7 +57,7 @@ const Home = () => {
                 <div className="...">
                   <div className='border-solid'>
                     <p className='font-bold'>Experience</p>
-                    <p>4+ years <br /><span>Software Engineer</span></p>
+                    <p>7+ years <br /><span>Software Engineer</span></p>
                   </div>
                 </div>
               </div>

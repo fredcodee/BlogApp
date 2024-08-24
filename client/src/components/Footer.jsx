@@ -11,7 +11,7 @@ const Footer = () => {
             <div className="relative container mx-auto p-6">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center pt-2"> 
-                        <h2 className='text-lg'>@Fredcode 2023. All rights reserved.</h2>
+                        <h2 className='text-lg'>@Fredcode 2024. All rights reserved.</h2>
                     </div>
                     <div className="hidden md:flex space-x-10">
                         <Link to="https://twitter.com/fredcode_" className="no-underline">
