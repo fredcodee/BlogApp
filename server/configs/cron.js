@@ -9,7 +9,7 @@ if (!URL) {
 }
 
 
-const job = new cron.CronJob("*/45 * * * *", function () {
+const job = new cron.CronJob("*/15 * * * *", function () {
 	https
 		.get(`${URL}/api/admin/health-check`, (res) => {
 			if (res.statusCode === 200) {
