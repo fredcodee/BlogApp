@@ -6,7 +6,7 @@ const cors = require('cors');
 const allowedOrigins = require('./configs/allowedOrigins');
 const  appRoutes = require("./routes/appRoutes")
 const adminRoutes = require("./routes/admin")
-
+const job = require('./configs/cron');
 
 
 const app = express();
@@ -23,10 +23,10 @@ app.use('/api/admin', adminRoutes);
 
 
 
-
 mongoose.set("strictQuery", false);
 mongoose.connect(process.env.DATABASE).then(()=>{
     app.listen(process.env.PORT);
+    job.start();
     console.log(`listening to ${process.env.PORT}`)
 })
 .catch(err => console.log(err))
