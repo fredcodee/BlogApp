@@ -7,6 +7,7 @@ import aboutMeImg from '../assets/images/aboutme.jpg'
 import project1 from '../assets/images/project1.jpg'
 import project2 from '../assets/images/project2.jpg'
 import project3 from '../assets/images/example.jpg'
+import project4 from '../assets/images/project4.jpg'
 
 const Home = () => {
 
@@ -105,22 +106,25 @@ const Home = () => {
                 <h3 className='text-slate-500'>Backend Development</h3>
                 <div className="grid grid-cols-3 gap-4 text-center pt-5">
                   <div className="...">
-                    <p><span><FontAwesomeIcon icon={faCircleCheck} style={{color: "#0f0f0f",}}  className='pr-2'/></span>MongoDb</p>
-                  </div>
-                  <div className="...">
-                    <p><span><FontAwesomeIcon icon={faCircleCheck} style={{color: "#0f0f0f",}}  className='pr-2'/></span>PostgreSQL</p>
+                    <p><span><FontAwesomeIcon icon={faCircleCheck} style={{color: "#0f0f0f",}}  className='pr-2'/></span>Django</p>
                   </div>
                   <div className="...">
                     <p><span><FontAwesomeIcon icon={faCircleCheck} style={{color: "#0f0f0f",}}  className='pr-2'/></span>Node Js</p>
                   </div>
                   <div className="...">
+                    <p><span><FontAwesomeIcon icon={faCircleCheck} style={{color: "#0f0f0f",}}  className='pr-2'/></span>PostgreSQL/Mysql</p>
+                  </div>
+                  <div className="...">
+                    <p><span><FontAwesomeIcon icon={faCircleCheck} style={{color: "#0f0f0f",}}  className='pr-2'/></span>MongoDb</p>
+                  </div>
+                  <div className="...">
                     <p><span><FontAwesomeIcon icon={faCircleCheck} style={{color: "#0f0f0f",}}  className='pr-2'/></span>Express Js</p>
                   </div>
                   <div className="...">
-                    <p><span><FontAwesomeIcon icon={faCircleCheck} style={{color: "#0f0f0f",}}  className='pr-2'/></span>Django</p>
+                    <p><span><FontAwesomeIcon icon={faCircleCheck} style={{color: "#0f0f0f",}}  className='pr-2'/></span>Git</p>
                   </div>
                   <div className="...">
-                    <p><span><FontAwesomeIcon icon={faCircleCheck} style={{color: "#0f0f0f",}}  className='pr-2'/></span>Git</p>
+                    <p><span><FontAwesomeIcon icon={faCircleCheck} style={{color: "#0f0f0f",}}  className='pr-2'/></span>AWS</p>
                   </div>
                 </div>
               </div>
@@ -147,6 +151,18 @@ const Home = () => {
                   <p className='pb-5'>A platform built for a new way of working and boost your team’s alignment, efficiency, and productivity by customizing any workflow to fit your needs.</p>
                   <a href='https://teammanagement.netlify.app/'  className="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-400 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Live Demo</a>
                   <a href='https://github.com/fredcodee/TeamManagement'  className="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-400 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Github</a>
+                </div>
+              </div>
+            </div>
+            <div className="...">
+              <div className='border-solid border-2 border-gray-500 rounded-lg p-4' style={{height:'30rem'}}>
+                <div>
+                  <img src={project4} alt="project image"/>
+                </div>
+                <div>
+                  <p className='font-bold pt-4 text-2xl'>ApplyAssistant-AI</p>
+                  <p className='pb-5'>Let AI Build your resume and cover letter, customize to the job description you want and keep track of jobs application.</p>
+                  <a href='https://github.com/fredcodee/ApplyAssistant-AI'  className="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-400 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Github</a>
                 </div>
               </div>
             </div>
