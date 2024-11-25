@@ -98,6 +98,9 @@ const Home = () => {
                   <div className="...">
                     <p><span><FontAwesomeIcon icon={faCircleCheck} style={{color: "#0f0f0f",}}  className='pr-2'/></span>React</p>
                   </div>
+                  <div className="...">
+                    <p><span><FontAwesomeIcon icon={faCircleCheck} style={{color: "#0f0f0f",}}  className='pr-2'/></span>TypeScript</p>
+                  </div>
                 </div>
               </div>
             </div>
