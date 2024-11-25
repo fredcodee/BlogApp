@@ -1,5 +1,5 @@
 import React from 'react'
-import Resume from '../assets/files/resume.pdf'
+import Resume from '../assets/files/resume_.pdf'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faCircleCheck, faEnvelope} from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faLinkedin} from '@fortawesome/free-brands-svg-icons';
