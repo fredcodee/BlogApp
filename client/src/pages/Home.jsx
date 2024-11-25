@@ -112,6 +112,9 @@ const Home = () => {
                     <p><span><FontAwesomeIcon icon={faCircleCheck} style={{color: "#0f0f0f",}}  className='pr-2'/></span>Node Js</p>
                   </div>
                   <div className="...">
+                    <p><span><FontAwesomeIcon icon={faCircleCheck} style={{color: "#0f0f0f",}}  className='pr-2'/></span>TypeScript</p>
+                  </div>
+                  <div className="...">
                     <p><span><FontAwesomeIcon icon={faCircleCheck} style={{color: "#0f0f0f",}}  className='pr-2'/></span>PostgreSQL/Mysql</p>
                   </div>
                   <div className="...">
