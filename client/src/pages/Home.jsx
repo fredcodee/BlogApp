@@ -1,5 +1,5 @@
 import React from 'react'
-import Resume from '../assets/files/resume_.pdf'
+import Resume from '../assets/files/resume.pdf'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faCircleCheck, faEnvelope} from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faLinkedin} from '@fortawesome/free-brands-svg-icons';
@@ -113,9 +113,6 @@ const Home = () => {
                   </div>
                   <div className="...">
                     <p><span><FontAwesomeIcon icon={faCircleCheck} style={{color: "#0f0f0f",}}  className='pr-2'/></span>Node Js</p>
-                  </div>
-                  <div className="...">
-                    <p><span><FontAwesomeIcon icon={faCircleCheck} style={{color: "#0f0f0f",}}  className='pr-2'/></span>TypeScript</p>
                   </div>
                   <div className="...">
                     <p><span><FontAwesomeIcon icon={faCircleCheck} style={{color: "#0f0f0f",}}  className='pr-2'/></span>PostgreSQL/Mysql</p>
